@@ -52,7 +52,7 @@ const FishMap = (props) => {
         <div id="mapContainer">
             <ReactMapGl 
                 {...viewport} 
-                mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                mapboxApiAccessToken="pk.eyJ1IjoiaG93YWt5bCIsImEiOiJja2kyNnBicjgwc2p1MnltczJsdnl3d21mIn0.SLI_INsIZTohrQ3H-tc9cA"
                 mapStyle="mapbox://styles/howakyl/ckjf4skamegso19lhg8mm027h"
                 onViewportChange={(viewport) => {
                     setViewport(viewport);
