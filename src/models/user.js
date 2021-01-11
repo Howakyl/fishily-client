@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-const endPoint = `http://localhost:4000/api/fishily/users`;
-const logInEndPoint = `http://localhost:4000/api/fishily/users/login`;
+let endPoint;
+let logInEndPoint;
+
+if (process.env.NODE_ENV === 'production') {
+    endPoint = `https://fishily-api.herokuapp.com/api/fishily/users`
+    logInEndPoint = `https://fishily-api.herokuapp.com/api/fishily/users/login`
+} else {
+    endPoint = `http://localhost:4000/api/fishily/users`;
+    logInEndPoint = `http://localhost:4000/api/fishily/users/login`;
+};
+
 
 class UserModel {
     //GET all users

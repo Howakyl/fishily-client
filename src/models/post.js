@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-const endPoint = `http://localhost:4000/api/fishily/posts`
+
+let endPoint;
+
+if (process.env.NODE_ENV === 'production') {
+    endPoint = `https://fishily-api.herokuapp.com/api/fishily/posts`
+} else {
+    endPoint = `http://localhost:4000/api/fishily/posts`
+};
 
 class PostModel {
 
