@@ -40,6 +40,15 @@ nav a:hover {
     border: #234a35 2px solid;
 }
 
+/* SPINNER */
+
+.big-spinner {
+  margin-top: 200px;
+  height: 4rem;
+  width: 4rem;
+  font-size: 25px;
+}
+
 /* FORMS */
 
 .logInTitle {

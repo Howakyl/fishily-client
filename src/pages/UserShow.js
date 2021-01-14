@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link , withRouter } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
 import './UserShow.css';
 
@@ -117,7 +118,7 @@ class UserShow extends React.Component {
                 </div>
             );
         } else {
-            return <h1>Loading...</h1>
+            return <Spinner /> 
         }
     };
 };
