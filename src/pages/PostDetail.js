@@ -1,4 +1,5 @@
 import React from 'react'; 
+import Spinner from '../components/Spinner';
 import PostModel from '../models/post';
 import { Redirect , Link, withRouter } from 'react-router-dom';
 import './PostDetail.css';
@@ -82,7 +83,7 @@ class PostDetail extends React.Component {
                 </div>
             )
         } else {
-            return <h1>Loading...</h1>
+            return <Spinner />
         }
     }
 }

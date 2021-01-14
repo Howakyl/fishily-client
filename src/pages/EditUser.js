@@ -1,4 +1,5 @@
 import React , { useState, useEffect } from 'react';
+import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
 
 const EditUser = (props) => {
@@ -110,7 +111,7 @@ const EditUser = (props) => {
             </div>
         )
     } else {
-        return <h3>Loading...</h3>
+        return <Spinner />
     }
 }
 

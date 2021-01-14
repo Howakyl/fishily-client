@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from '../components/Spinner';
 import PostModel from '../models/post';
 import './EditPost.css';
 
@@ -51,7 +52,7 @@ class EditPost extends React.Component {
     render() {
 
         if (this.state.loading) {
-            return <div>Loading...</div>
+            return <Spinner />
         }
         return (
             <div>

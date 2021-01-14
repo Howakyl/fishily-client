@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
 import UserCard from '../components/UserCard';
 import './UserList.css';
@@ -45,9 +46,7 @@ class UserList extends React.Component {
                 </div>
             )
         } else {
-            return (
-                <h1>Loading...</h1>
-            )
+            return <Spinner />
         }
     }
 };
