@@ -1,30 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
 import FishMap from '../components/FishMap';
 import Spinner from '../components/Spinner';
 import PostModel from '../models/post';
 import './PostList.css';
 
-class PostList extends React.Component {
+const PostList = (props) => {
 
-    state = {
-        posts: [],
-        loading: true,
-    }
+    const [ posts, setPosts ] = useState([]);
+    const [ loading, setLoading ] = useState(true);
 
-    componentDidMount() {
-
+    useEffect(() => {
         PostModel.all().then((res) => {
-            
-            this.setState({
-                posts: res.data.posts,
-                loading: false,
-            });
+            setPosts(res.data.posts);
+            setLoading(false);
         });
-    };
+    } , []);
 
-    renderPosts () {
-        return this.state.posts.map((post) => {
+    function renderPosts () {
+        return posts.map((post) => {
             return (
                 <PostCard 
                     post={post}
@@ -34,27 +28,23 @@ class PostList extends React.Component {
         }).reverse();
     };
 
-
-    render () {
-
-        if (!this.state.loading) {
+        if (!loading) {
             return (
                 <div className="postList-wrapper">
                     <div className="mapBoxContainer">
-                        <FishMap posts={this.state.posts}/>
+                        <FishMap posts={posts}/>
                     </div>
                     <div className="postList-container container">
                         <h3 className="postList-title"><strong>Recent Posts:</strong></h3>
                         
                         <hr/>
-                        {this.renderPosts()}
+                        {renderPosts()}
                     </div>
                 </div>
             )
         } else {
             return <Spinner />
         }
-    }
 }
 
 export default PostList;
