@@ -127,7 +127,7 @@ class NewPost extends React.Component {
                         />
                     </div>
                     
-                    <button type="submit" className="btn btn-primary">Submit Post</button>
+                    <button type="submit" className="btn btn-primary newPostBtn">Submit Post</button>
                 </form>
             </div>
         );
