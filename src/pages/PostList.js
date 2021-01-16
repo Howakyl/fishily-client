@@ -35,7 +35,7 @@ const PostList = (props) => {
                         <FishMap posts={posts}/>
                     </div>
                     <div className="postList-container container">
-                        <h3 className="postList-title"><strong>Recent Posts:</strong></h3>
+                        <h3 className="postList-title">Recent Posts:</h3>
                         
                         <hr/>
                         {renderPosts()}
