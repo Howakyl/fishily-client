@@ -1,6 +1,7 @@
 import React from 'react';
 import PostModel from '../models/post';
 import { Redirect } from 'react-router-dom';
+import NewPostMap from '../components/NewPostMap';
 
 class NewPost extends React.Component {
     state = {
@@ -72,6 +73,8 @@ class NewPost extends React.Component {
                             name="fish" 
                         />
                     </div>
+
+                    <NewPostMap />
 
                     <section className="row">
                         <div className="form-group col newPost-location">
