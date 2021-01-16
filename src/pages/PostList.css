@@ -46,10 +46,11 @@
 
     #mapContainer {
         width: 60vw !important;
+        height: 100%;
     }
 
     #mapContainer  > * {
-        height: 71vh !important;
+        height: 100% !important;
         width: 100% !important;
     }
 
