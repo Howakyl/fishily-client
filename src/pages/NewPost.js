@@ -1,6 +1,7 @@
 import React from 'react';
 import PostModel from '../models/post';
 import { Redirect } from 'react-router-dom';
+import NewPostMap from '../components/NewPostMap';
 
 class NewPost extends React.Component {
     state = {
@@ -73,6 +74,9 @@ class NewPost extends React.Component {
                         />
                     </div>
 
+                    <h4 className="newPostMapTitle">Drag the pin to get your coordinates!</h4>
+                    <NewPostMap />
+
                     <section className="row">
                         <div className="form-group col newPost-location">
                             <label htmlFor="locationInput">Where Was Your Catch?</label>
@@ -123,7 +127,7 @@ class NewPost extends React.Component {
                         />
                     </div>
                     
-                    <button type="submit" className="btn btn-primary">Submit Post</button>
+                    <button type="submit" className="btn btn-primary newPostBtn">Submit Post</button>
                 </form>
             </div>
         );

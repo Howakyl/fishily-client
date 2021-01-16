@@ -1,0 +1,40 @@
+.coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
+}
+
+.newPostMapContainer {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.newPostMapContainer div {
+    border-radius: 5px;
+}
+
+.newPostMarker {
+    height: 25px;
+    width: 25px;
+    background-image: url('./fish-marker.png');
+    background-size: contain;
+}
+
+.newPostMapTitle {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.newPostBtn {
+    margin-bottom: 2rem;
+}
