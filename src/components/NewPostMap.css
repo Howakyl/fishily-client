@@ -12,6 +12,16 @@
     display: none;
 }
 
+.newPostMapContainer {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.newPostMapContainer div {
+    border-radius: 5px;
+}
+
 .newPostMarker {
     height: 25px;
     width: 25px;

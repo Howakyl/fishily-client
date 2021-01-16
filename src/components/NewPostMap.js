@@ -12,7 +12,7 @@ const NewPostMap = (props) => {
         latitude: 47.6062,
         longitude: -122.3321,
         zoom: 9,
-        width: '80vw',
+        width: '100%',
         height: '60vh'
     });
 
@@ -25,7 +25,7 @@ const NewPostMap = (props) => {
 
 
     return (
-        <div>
+        <div className="newPostMapContainer">
             <ReactMapGl
                 {...viewport}
                 mapboxApiAccessToken="pk.eyJ1IjoiaG93YWt5bCIsImEiOiJja2kyNnBicjgwc2p1MnltczJsdnl3d21mIn0.SLI_INsIZTohrQ3H-tc9cA"
