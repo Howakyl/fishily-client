@@ -208,7 +208,7 @@ align-items: flex-start;
   position: relative;
   float: left;
   margin: 0px auto;
-  width: 30%;
+  width: 40%;
   padding: 10px;
   border: none;
   border-radius: 3px;
@@ -294,6 +294,12 @@ align-items: flex-start;
   }
 }
 
+@media only screen and (max-width: 900px) {
+  #info {
+    width: 40%;
+  }
+}
+
 @media only screen and (max-width: 770px) {
   .newPost-location {
     flex-basis: auto;
@@ -307,6 +313,10 @@ align-items: flex-start;
 
   .getStarted {
     background-position: right;
+  }
+
+  #info {
+    width: 50%;
   }
 }
 
