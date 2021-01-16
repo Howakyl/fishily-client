@@ -40,8 +40,8 @@ const NewPostMap = (props) => {
                         longitude: e.lngLat[0],
                         latitude: e.lngLat[1]
                     });
-                    coordinates.innerHTML = 
-                    'Longitude: ' + markerPostion.longitude + '<br />Latitude: ' + markerPostion.latitude;
+                    // coordinates.innerHTML = 
+                    // 'Longitude: ' + markerPostion.longitude + '<br />Latitude: ' + markerPostion.latitude;
                 }}
                 onDragEnd={(e) => {
                     setMarkerPosition({

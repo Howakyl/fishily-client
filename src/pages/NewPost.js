@@ -74,6 +74,7 @@ class NewPost extends React.Component {
                         />
                     </div>
 
+                    <h4 className="newPostMapTitle">Drag the pin to get your coordinates!</h4>
                     <NewPostMap />
 
                     <section className="row">
