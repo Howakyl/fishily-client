@@ -1,3 +1,4 @@
+
 .postList-container {
     display: flex;
     flex-direction: column;
@@ -36,6 +37,34 @@
 .mapBoxContainer {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-top: 1px solid #234a35;
+}
+
+@media only screen and (min-width: 1077px) {
+    .postList-wrapper {
+        display: flex;
+        /* align-items: center; */
+    }
+
+    #mapContainer {
+        width: 60vw !important;
+        /* height: 100% !important; */
+    }
+
+    #mapContainer  > * {
+        height: 71vh !important;
+        width: 100% !important;
+    }
+
+    /* .mapboxgl-map {
+        width: 60vw !important;
+    } */
+}
+
+@media only screen and (max-width: 1077px) {
+
+    .mapBoxContainer {
+        width: 100vw !important;
+    }
 }
 
 @media only screen and (max-width: 770px) {
