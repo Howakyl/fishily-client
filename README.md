@@ -1,5 +1,14 @@
 # Fishily
 
+### API REPO: https://github.com/Howakyl/fishily-api
+
+#### PREVIOUS COMMIT HISTORY: github.com/Howakyl/fishily
+
+
+### If you would like to try out my app, here is a testing account:
+* username: jdoe99
+* password: qwerty
+
 ![Landing](wireframe-images/Landing.png)
 ### What is fishily? 
 Fishily is an app built in the MERN stack (MongoDB, Express, React, Node). Made for local fishermen/women to find and share their favorite fishing spots! 
