@@ -5,24 +5,9 @@ import UserCard from '../components/UserCard';
 import './UserList.css';
 
 const UserList = (props) => {
-    // state = {
-    //     users: [],
-    //     loading: true,
-    // }
 
     const [ users, setUsers ] = useState([]);
     const [ loading, setLoading ] = useState(true);
-
-    // componentDidMount() {
-
-    //     UserModel.all().then((res) => {
-
-    //         this.setState({ 
-    //             users: res.data.users,
-    //             loading: false,
-    //         })
-    //     });
-    // };
 
     useEffect(() => {
         UserModel.all().then((res) => {
@@ -33,7 +18,7 @@ const UserList = (props) => {
 
     function renderUsers () {
         
-        return this.state.users.map((user) => {
+        return users.map((user) => {
             return (
                 <li className="userList-card" key={user._id}>
                     <UserCard
@@ -45,13 +30,12 @@ const UserList = (props) => {
     }
 
 
-        if(!this.state.loading) {
+        if(!loading) {
             return (
                 <div className="container">
                     <h2 className="userList-title">Fishily users:</h2>
                     <ul className="userList-container">
-                    
-                        {this.renderUsers()}
+                        {renderUsers()}
                     </ul>
                 </div>
             )
