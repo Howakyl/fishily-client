@@ -9,7 +9,7 @@ const SignUp = (props) => {
     const [ lastName, setLastName ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ bio, setBio ] = useState('');
-    const [redirectToLogin, setRedirectToLogin ] = useState(false);
+    const [ redirectToLogin, setRedirectToLogin ] = useState(false);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
