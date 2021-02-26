@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link , withRouter } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
