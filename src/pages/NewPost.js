@@ -4,16 +4,6 @@ import { Redirect } from 'react-router-dom';
 import NewPostMap from '../components/NewPostMap';
 
 const NewPost = (props) => {
-    // state = {
-    //     title : '',
-    //     description: '',
-    //     fish: '',
-    //     locationName: '',
-    //     lat: undefined,
-    //     lng: undefined,
-    //     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png',
-    //     redirectToPosts: false
-    // }
 
     const [title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
@@ -24,13 +14,8 @@ const NewPost = (props) => {
     const [ image, setImage ] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png');
     const [redirectToPosts, setRedirectToPosts ] = useState(false);
 
-    // handleInputChange = (event) => {
-    //     this.setState({ [event.target.name] : event.target.value });
-    // };
-
     const handleFormSubmit = (event) => {
         event.preventDefault();
-
         const formData = {
             title: title,
             description: description,
