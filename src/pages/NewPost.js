@@ -1,52 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PostModel from '../models/post';
 import { Redirect } from 'react-router-dom';
 import NewPostMap from '../components/NewPostMap';
 
-class NewPost extends React.Component {
-    state = {
-        title : '',
-        description: '',
-        fish: '',
-        locationName: '',
-        lat: undefined,
-        lng: undefined,
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png',
-        redirectToPosts: false
-    }
+const NewPost = (props) => {
+    // state = {
+    //     title : '',
+    //     description: '',
+    //     fish: '',
+    //     locationName: '',
+    //     lat: undefined,
+    //     lng: undefined,
+    //     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png',
+    //     redirectToPosts: false
+    // }
 
-    handleInputChange = (event) => {
-        this.setState({ [event.target.name] : event.target.value });
-    };
+    const [title, setTitle ] = useState('');
+    const [ description, setDescription ] = useState('');
+    const [ fish, setFish ] = useState('');
+    const [ locationName, setLocationName ] = useState('');
+    const [ lat, setLat ] = useState('');
+    const [ lng, setLng ] = useState('');
+    const [ image, setImage ] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png');
+    const [redirectToPosts, setRedirectToPosts ] = useState(false);
 
+    // handleInputChange = (event) => {
+    //     this.setState({ [event.target.name] : event.target.value });
+    // };
 
-    handleFormSubmit = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
 
-        PostModel.create(this.state, this.props.user._id)
+        const formData = {
+            title: title,
+            description: description,
+            fish: fish,
+            locationName: locationName,
+            lat: lat,
+            lng: lng,
+            image: image
+        }
+
+        PostModel.create(formData, props.user._id)
             .then((res) => {
-                this.setState({ redirectToPosts : true})
+                setRedirectToPosts(true)
             })
     }
 
-    render () {
-
-        if (this.state.redirectToPosts) {
+        if (redirectToPosts) {
             return <Redirect to="/posts"/>
         } 
         return (
             <div>
-                <form className="container" onSubmit={this.handleFormSubmit}>
+                <form className="container" onSubmit={handleFormSubmit}>
                     <h1 className="newPost-title">submit a new post!</h1>
                     <div className="form-group">
                         <label htmlFor="titleInput">Title</label>
                         <small className="form-text text-muted">required</small>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setTitle(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="titleInput"
-                            value={this.state.title}
+                            value={title}
                             name="title"
                         />
                     </div>
@@ -54,22 +70,22 @@ class NewPost extends React.Component {
                         <label htmlFor="descInput">Description</label>
                         <small className="form-text text-muted">include a short description about your catch!</small>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setDescription(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="descInput"
-                            value={this.state.description}
+                            value={description}
                             name="description"
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="fishInput">Fish Caught:</label>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setFish(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="fishInput"
-                            value={this.state.fish}
+                            value={fish}
                             name="fish" 
                         />
                     </div>
@@ -81,22 +97,22 @@ class NewPost extends React.Component {
                         <div className="form-group col newPost-location">
                             <label htmlFor="locationInput">Where Was Your Catch?</label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLocationName(e.target.value)}
                                 type="text" 
                                 className="form-control" 
                                 id="locationInput" 
-                                value={this.state.locationName}
+                                value={locationName}
                                 name="locationName"
                             />
                         </div>
                         <div className="form-group col">
                             <label htmlFor="latInput">Latitude<span className="text-muted"> - required</span></label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLat(e.target.value)}
                                 type="number" 
                                 className="form-control" 
                                 id="latInput" 
-                                value={this.state.lat}
+                                value={lat}
                                 name="lat"
                                 step=".01"
                             />
@@ -104,11 +120,11 @@ class NewPost extends React.Component {
                         <div className="form-group col">
                             <label htmlFor="lngInput">Longitude<span className="text-muted"> - required</span></label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLng(e.target.value)}
                                 type="number" 
                                 className="form-control" 
                                 id="lngInput" 
-                                value={this.state.lng}
+                                value={lng}
                                 name="lng"
                                 step=".01"
                             />
@@ -118,11 +134,11 @@ class NewPost extends React.Component {
                     <div className="form-group">
                         <label htmlFor="imageInput">Submit a picture!</label>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setImage(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="imageInput" 
-                            value={this.state.image}
+                            value={image}
                             name="image"
                         />
                     </div>
@@ -132,6 +148,5 @@ class NewPost extends React.Component {
             </div>
         );
     };
-};
 
 export default NewPost;

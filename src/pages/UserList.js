@@ -29,19 +29,18 @@ const UserList = (props) => {
         })
     }
 
-
-        if(!loading) {
-            return (
-                <div className="container">
-                    <h2 className="userList-title">Fishily users:</h2>
-                    <ul className="userList-container">
-                        {renderUsers()}
-                    </ul>
-                </div>
-            )
-        } else {
-            return <Spinner />
-        }
+    if(!loading) {
+        return (
+            <div className="container">
+                <h2 className="userList-title">Fishily users:</h2>
+                <ul className="userList-container">
+                    {renderUsers()}
+                </ul>
+            </div>
+        )
+    } else {
+        return <Spinner />
+    }
 };
 
 export default UserList;
