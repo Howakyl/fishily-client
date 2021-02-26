@@ -1,47 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link , withRouter } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
 import './UserShow.css';
 
 
-class UserShow extends React.Component {
+const UserShow = (props) => {
 
-    state = {
-        user: {},
-        loading: true,
-    };
+    const [ user, setUser ] = useState({});
+    const [ loading, setLoading ] = useState(true);
 
-    componentDidMount() {
-        const userId = this.props.match.params.id
-        
+    useEffect(() => {
+        const userId = props.match.params.id;
         UserModel.getOne(userId).then((res) => {
-            
-            this.setState({
-                user: res.data.user,
-                loading: false,
-            });
+            setUser(res.data.user);
+            setLoading(false);
         });
-    };
-    
-    componentDidUpdate (prevProps) {
-        const userId = this.props.match.params.id
+    }, [props.match.params.id]);
 
-        if (userId !== prevProps.match.params.id) {
-            UserModel.getOne(userId).then((res) => {
-                
-                this.setState({
-                    user: res.data.user,
-                });
-            });
-        }
-    }
-
-    renderPosts () {
-        if (this.state.user.posts.length > 0 ) {
+    function renderPosts () {
+        if (user.posts.length > 0 ) {
 
             return (
-                this.state.user.posts.map((post, index) => {
+                user.posts.map((post, index) => {
                     return (
                     <div className="card mb-3 userShow-post-card" style={{maxWidth: "540px"}} key={index}>
                         <div className="row g-0">
@@ -69,10 +50,10 @@ class UserShow extends React.Component {
         }
     }
 
-    renderBio () {
-        if (this.state.user.bio.length > 0) {
+    function renderBio () {
+        if (user.bio.length > 0) {
             return (
-                <p>{this.state.user.bio}</p>
+                <p>{user.bio}</p>
             )
         } else {
             return (
@@ -81,46 +62,44 @@ class UserShow extends React.Component {
         }
     }
 
-    renderBtns() {
-        if (this.props.user._id === this.state.user._id) {
+    function renderBtns() {
+        if (props.user._id === user._id) {
             return (
                 <>
-                    <Link to={`/users/${this.state.user._id}/edit`} className="btn btn-primary">Edit Profile</Link>
+                    <Link to={`/users/${user._id}/edit`} className="btn btn-primary">Edit Profile</Link>
                     <Link to="/posts/new" className="btn btn-primary">New Post</Link>
                 </>
             )
         }
     }
 
-    render () {
-        if (!this.state.loading) {
-            return (
-                <div className="userShow-container">
-                <section className="userShow-info">
-                    <img src={this.state.user.picture} alt={this.state.user.username} className="user-detail-img"/>
-                    <h1 className="userShow-username">{this.state.user.username}</h1>
-                    <h5 className="userShow-name">{this.state.user.firstName} {this.state.user.lastName}</h5>
-                    <br/>
-                    <div className="userShow-bio text-wrap text-break">
-                        {this.renderBio()}
-                    </div>
-                    <hr/>
-                    <div className="userShow-btns">
-                        {this.renderBtns()}
-                    </div>
-                </section>
-
-                    <section className="userShow-posts-container">
-                        <h3 className="userShow-posts-title">{this.state.user.username}'s Catches</h3>
-                        <hr/>
-                        {this.renderPosts()}
-                    </section>
+    if (!loading) {
+        return (
+            <div className="userShow-container">
+            <section className="userShow-info">
+                <img src={user.picture} alt={user.username} className="user-detail-img"/>
+                <h1 className="userShow-username">{user.username}</h1>
+                <h5 className="userShow-name">{user.firstName} {user.lastName}</h5>
+                <br/>
+                <div className="userShow-bio text-wrap text-break">
+                    {renderBio()}
                 </div>
-            );
-        } else {
-            return <Spinner /> 
-        }
-    };
+                <hr/>
+                <div className="userShow-btns">
+                    {renderBtns()}
+                </div>
+            </section>
+
+                <section className="userShow-posts-container">
+                    <h3 className="userShow-posts-title">{user.username}'s Catches</h3>
+                    <hr/>
+                    {renderPosts()}
+                </section>
+            </div>
+        );
+    } else {
+        return <Spinner /> 
+    }
 };
 
 export default withRouter(UserShow);

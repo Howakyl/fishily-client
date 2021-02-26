@@ -1,54 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UserModel from '../models/user';
 import { Redirect } from 'react-router-dom';
 
-class SignUp extends React.Component {
-    state = {
-        username: '',
-        firstName: '',
-        lastName: '',
-        password: '',
-        bio: '',
-        redirectToPosts: false,
-    };
+const SignUp = (props) => {
 
-    handleInputChange = (event) => {
+    const [ username, setUsername ] = useState('');
+    const [ firstName, setFirstName ] = useState('');
+    const [ lastName, setLastName ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ bio, setBio ] = useState('');
+    const [ redirectToLogin, setRedirectToLogin ] = useState(false);
 
-        this.setState({ [event.target.name] : event.target.value });
-    };
-
-    handleFormSubmit = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
-
-        UserModel.create(this.state)
-        .then((res) => {
-            this.setState({ redirectToPosts : true })
-        })
+        const formData = {
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            password: password,
+            bio: bio
+        }
+        UserModel.create(formData)
+            .then(() => {
+                setRedirectToLogin(true)
+            })
     }
-    
 
-    render () {
-
-        if(this.state.redirectToPosts) {
+        if(redirectToLogin) {
             return <Redirect to='/login'/>
         }
 
-        if(this.props.user.username) {
+        if(props.user.username) {
             return <Redirect to='/'/>
         } else {
             return (
                 <div className="signupContainer">
-                    <form className="container" onSubmit={this.handleFormSubmit}>
+                    <form className="container" onSubmit={handleFormSubmit}>
                         <h1>Sign Up!</h1>
                         <div className="form-group">
                             <label htmlFor="usernameInput">username</label>
                             <small className="form-text text-muted">required</small>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setUsername(e.target.value)}
                                 type="text" 
                                 className="form-control" 
                                 id="usernameInput"
-                                value={this.state.username}
+                                value={username}
                                 name="username"
                                 pattern=".{4,}"
                                 title="Must be at least 4 characters long."
@@ -58,11 +55,11 @@ class SignUp extends React.Component {
                             <label htmlFor="passInput">Password</label>
                             <small className="form-text text-muted">required</small>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setPassword(e.target.value)}
                                 type="password" 
                                 className="form-control" 
                                 id="passInput"
-                                value={this.state.password}
+                                value={password}
                                 name="password"
                                 pattern=".{4,}"
                                 title="Must be at least 4 characters long."
@@ -71,33 +68,33 @@ class SignUp extends React.Component {
                         <div className="form-group">
                             <label htmlFor="firstNameInput">first name</label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setFirstName(e.target.value)}
                                 type="text" 
                                 className="form-control" 
                                 id="firstNameInput"
-                                value={this.state.firstName}
+                                value={firstName}
                                 name="firstName" 
                             />
                         </div>
                         <div className="form-group">
                             <label htmlFor="lastNameInput">last name</label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLastName(e.target.value)}
                                 type="text" 
                                 className="form-control" 
                                 id="lastNameInput" 
-                                value={this.state.lastName}
+                                value={lastName}
                                 name="lastName"
                             />
                         </div>
                         <div className="form-group">
                             <label htmlFor="bioInput">Create a bio:</label>
                             <textarea
-                                onChange={this.handleInputChange}
+                                onChange={e => setBio(e.target.value)}
                                 type="text" 
                                 className="form-control" 
                                 id="bioInput" 
-                                value={this.state.bio}
+                                value={bio}
                                 name="bio"
                                 pattern=".{,200}"
                                 title="Must be fewer than 200 characters long."
@@ -110,6 +107,6 @@ class SignUp extends React.Component {
             )
         } 
     }
-}
+
 
 export default SignUp;
