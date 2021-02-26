@@ -1,29 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
 import UserCard from '../components/UserCard';
 import './UserList.css';
 
-class UserList extends React.Component {
-    state = {
-        users: [],
-        loading: true,
-    }
+const UserList = (props) => {
 
-    componentDidMount() {
+    const [ users, setUsers ] = useState([]);
+    const [ loading, setLoading ] = useState(true);
 
+    useEffect(() => {
         UserModel.all().then((res) => {
+            setUsers(res.data.users);
+            setLoading(false);
+        })
+    } , []);
 
-            this.setState({ 
-                users: res.data.users,
-                loading: false,
-            })
-        });
-    };
-
-    renderUsers () {
+    function renderUsers () {
         
-        return this.state.users.map((user) => {
+        return users.map((user) => {
             return (
                 <li className="userList-card" key={user._id}>
                     <UserCard
@@ -34,20 +29,17 @@ class UserList extends React.Component {
         })
     }
 
-    render () {
-        if(!this.state.loading) {
-            return (
-                <div className="container">
-                    <h2 className="userList-title">Fishily users:</h2>
-                    <ul className="userList-container">
-                    
-                        {this.renderUsers()}
-                    </ul>
-                </div>
-            )
-        } else {
-            return <Spinner />
-        }
+    if(!loading) {
+        return (
+            <div className="container">
+                <h2 className="userList-title">Fishily users:</h2>
+                <ul className="userList-container">
+                    {renderUsers()}
+                </ul>
+            </div>
+        )
+    } else {
+        return <Spinner />
     }
 };
 
