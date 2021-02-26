@@ -1,27 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import UserModel from '../models/user';
 import UserCard from '../components/UserCard';
 import './UserList.css';
 
-class UserList extends React.Component {
-    state = {
-        users: [],
-        loading: true,
-    }
+const UserList = (props) => {
+    // state = {
+    //     users: [],
+    //     loading: true,
+    // }
 
-    componentDidMount() {
+    const [ users, setUsers ] = useState([]);
+    const [ loading, setLoading ] = useState(true);
 
+    // componentDidMount() {
+
+    //     UserModel.all().then((res) => {
+
+    //         this.setState({ 
+    //             users: res.data.users,
+    //             loading: false,
+    //         })
+    //     });
+    // };
+
+    useEffect(() => {
         UserModel.all().then((res) => {
+            setUsers(res.data.users);
+            setLoading(false);
+        })
+    } , []);
 
-            this.setState({ 
-                users: res.data.users,
-                loading: false,
-            })
-        });
-    };
-
-    renderUsers () {
+    function renderUsers () {
         
         return this.state.users.map((user) => {
             return (
@@ -34,7 +44,7 @@ class UserList extends React.Component {
         })
     }
 
-    render () {
+
         if(!this.state.loading) {
             return (
                 <div className="container">
@@ -48,7 +58,6 @@ class UserList extends React.Component {
         } else {
             return <Spinner />
         }
-    }
 };
 
 export default UserList;
