@@ -1,72 +1,70 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spinner';
 import PostModel from '../models/post';
 import './EditPost.css';
 
-class EditPost extends React.Component {
-    state = {
-        title : '',
-        description: '',
-        fish: '',
-        locationName: '',
-        lat: undefined,
-        lng: undefined,
-        image: '',
-        post: {},
-        loading: true
-    }
+const EditPost = (props) => {
+    const [ isLoading, setLoading ] = useState(true);
+    const [ title, setTitle ] = useState('');
+    const [ description, setDescription ] = useState('');
+    const [ fish, setFish ] = useState('');
+    const [ locationName, setLocationName ] = useState('');
+    const [ lat, setLat ] = useState('');
+    const [ lng, setLng ] = useState('');
+    const [ image, setImage ] = useState('');
 
-    componentDidMount() {
-        const postId = this.props.match.params.id;
+    useEffect (() => {
+        const postId = props.match.params.id;
         PostModel.getOne(postId)
             .then((data) => {
                 const res = data.data.post;
-                this.setState({ 
-                    
-                    title : res.title,
-                    description: res.description,
-                    fish: res.fish,
-                    locationName: res.locationName,
-                    lat: res.lat,
-                    lng: res.lng,
-                    image: res.image,
-                    loading: false,
-                })
+                setTitle(res.title);
+                setDescription(res.description);
+                setFish(res.fish);
+                setLocationName(res.locationName);
+                setLat(res.lat);
+                setLng(res.lng);
+                setImage(res.image);
+                setLoading(false);
             })
-    };
+    }, [props.match.params.id]);
 
-    handleInputChange = (event) => {
-        this.setState({ [event.target.name] : event.target.value });
-    };
-
-    handleFormSubmit = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
+        const postId = props.match.params.id;
 
-        const postId = this.props.match.params.id;
-        PostModel.update(postId, this.state)
+        const formData = {
+            title: title,
+            description: description,
+            fish: fish,
+            locationName: locationName,
+            lat: lat,
+            lng: lng,
+            image: image
+        }
+
+        PostModel.update(postId, formData)
             .then((res) => {
-                this.props.history.push(`/posts/${postId}`);
+                props.history.push(`/posts/${postId}`);
             });
     };
-    
-    render() {
 
-        if (this.state.loading) {
+        if (isLoading) {
             return <Spinner />
         }
         return (
             <div>
-                <form className="container editPost-form" onSubmit={this.handleFormSubmit}>
-                        <h1>Edit your post!</h1>
+                <form className="container editPost-form" onSubmit={handleFormSubmit}>
+                    <h1>Edit your post!</h1>
                     <div className="form-group">
                         <label htmlFor="titleInput">Title</label>
                         <small className="form-text text-muted">required</small>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setTitle(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="titleInput"
-                            value={this.state.title}
+                            value={title}
                             name="title"
                         />
                     </div>
@@ -74,22 +72,22 @@ class EditPost extends React.Component {
                         <label htmlFor="descInput">Description</label>
                         <small className="form-text text-muted">include a short description about your catch!</small>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setDescription(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="descInput"
-                            value={this.state.description}
+                            value={description}
                             name="description"
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="fishInput">Fish Caught:</label>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setFish(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="fishInput"
-                            value={this.state.fish}
+                            value={fish}
                             name="fish" 
                         />
                     </div>
@@ -98,22 +96,22 @@ class EditPost extends React.Component {
                         <div className="form-group col editPost-location">
                             <label htmlFor="locationInput">Where Was Your Catch?</label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLocationName(e.target.value)}
                                 type="text" 
                                 className="form-control" 
                                 id="locationInput" 
-                                value={this.state.locationName}
+                                value={locationName}
                                 name="locationName"
                             />
                         </div>
                         <div className="form-group col">
                             <label htmlFor="latInput">Latitude</label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLat(e.target.value)}
                                 type="number" 
                                 className="form-control" 
                                 id="latInput" 
-                                value={this.state.lat}
+                                value={lat}
                                 name="lat"
                                 step=".01"
                             />
@@ -121,11 +119,11 @@ class EditPost extends React.Component {
                         <div className="form-group col">
                             <label htmlFor="lngInput">Longitude</label>
                             <input
-                                onChange={this.handleInputChange}
+                                onChange={e => setLng(e.target.value)}
                                 type="number" 
                                 className="form-control" 
                                 id="lngInput" 
-                                value={this.state.lng}
+                                value={lng}
                                 name="lng"
                                 step=".01"
                             />
@@ -135,11 +133,11 @@ class EditPost extends React.Component {
                     <div className="form-group">
                         <label htmlFor="imageInput">Submit a picture!</label>
                         <input
-                            onChange={this.handleInputChange}
+                            onChange={e => setImage(e.target.value)}
                             type="text" 
                             className="form-control" 
                             id="imageInput" 
-                            value={this.state.image}
+                            value={image}
                             name="image"
                         />
                     </div>
@@ -149,6 +147,5 @@ class EditPost extends React.Component {
             </div>
         );
     }
-}
 
 export default EditPost;
