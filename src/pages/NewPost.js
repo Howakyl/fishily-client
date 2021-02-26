@@ -5,14 +5,14 @@ import NewPostMap from '../components/NewPostMap';
 
 const NewPost = (props) => {
 
-    const [title, setTitle ] = useState('');
+    const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ fish, setFish ] = useState('');
     const [ locationName, setLocationName ] = useState('');
     const [ lat, setLat ] = useState('');
     const [ lng, setLng ] = useState('');
     const [ image, setImage ] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png');
-    const [redirectToPosts, setRedirectToPosts ] = useState(false);
+    const [ redirectToPosts, setRedirectToPosts ] = useState(false);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
