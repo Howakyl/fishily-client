@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PostCard = (props) => {
+  const postDate = new Date (props.post.date)
+  const month = postDate.toLocaleString("en-US", {month: "long"})
+  const day = postDate.toLocaleString("en-US", {day: "2-digit"})
+  const year = postDate.getFullYear()
+
   return (
     <div className="card mb-3 postList-card" style={{ maxWidth: "540px" }}>
       <div className="row no-gutters">
@@ -30,7 +35,7 @@ const PostCard = (props) => {
             </div>
             <p className="card-text text-truncate">{props.post.description}</p>
             <p className="card-text">
-              <small className="text-muted">Posted On: {props.post.date}</small>
+              <small className="text-muted">Posted On: {month} {day} {year}</small>
             </p>
           </div>
         </div>
