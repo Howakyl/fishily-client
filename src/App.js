@@ -1,11 +1,10 @@
-import React , { useEffect, useState } from 'react';
-import './App.css';
-import Routes from './config/routes';
-import Navbar from './components/Navbar';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Routes from "./config/routes";
+import Navbar from "./components/Navbar";
 
 function App() {
-
-  let [ user , setUser ] = useState({});
+  let [user, setUser] = useState({});
 
   //checks if user is logged in
   useEffect(() => {
@@ -13,16 +12,15 @@ function App() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUser(foundUser);
-    } 
+    }
   }, []);
-
 
   return (
     <div>
-    <Navbar user={user} setUser={setUser}/>
-      <Routes user={user} setUser={setUser}/>
+      <Navbar user={user} setUser={setUser} />
+      <Routes user={user} setUser={setUser} />
     </div>
   );
-};
+}
 
 export default App;
