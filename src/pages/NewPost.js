@@ -14,6 +14,11 @@ const NewPost = (props) => {
     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png"
   );
   const [redirectToPosts, setRedirectToPosts] = useState(false);
+  
+  const onGetCoordinates = (coordinates) => {
+    setLng(coordinates.longitude)
+    setLat(coordinates.latitude)
+  }
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -80,7 +85,7 @@ const NewPost = (props) => {
         <h4 className="newPostMapTitle">
           Drag the pin to get your coordinates!
         </h4>
-        <NewPostMap />
+        <NewPostMap onGetCoordinates={onGetCoordinates} />
 
         <section className="row">
           <div className="form-group col newPost-location">

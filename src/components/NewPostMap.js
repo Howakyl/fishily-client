@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGl, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
 import "./NewPostMap.css";
@@ -18,6 +18,16 @@ const NewPostMap = (props) => {
     latitude: 47.6062,
     longitude: -122.3821,
   });
+  
+  useEffect (() => {
+    const timer = setTimeout(() => {
+      props.onGetCoordinates(markerPostion)
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    }
+  }, [markerPostion, props])
 
   const coordinates = document.getElementById("coordinates");
 
