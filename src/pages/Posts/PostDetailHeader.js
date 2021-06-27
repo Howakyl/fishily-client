@@ -4,11 +4,11 @@ import classes from "./PostDetailHeader.module.css";
 
 const PostDetailHeader = (props) => {
   return (
-    <>
-      <img src={props.post.image} alt="fish" className="img-fluid" />
+    <div className={classes.postHeaderContainer}>
+      <img src={props.post.image} alt="fish" className={`img-fluid ${classes.postImg}`} />
       <section className={classes.description}>
         <h2>{props.post.title}</h2>
-        <div className="user-info">
+        <div className={classes.userInfo}>
           <Link to={`/users/${props.post.user._id}`}>
             <img
               className=" img-fluid"
@@ -21,7 +21,7 @@ const PostDetailHeader = (props) => {
           </Link>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 export default PostDetailHeader;
