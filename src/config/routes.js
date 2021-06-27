@@ -7,8 +7,8 @@ import SignUp from '../pages/SignUp';
 import LogIn from '../pages/LogIn';
 import PostList from '../pages/PostList';
 import NewPost from '../pages/NewPost';
-import PostDetail from '../pages/PostDetail';
-import EditPost from '../pages/EditPost';
+import PostDetail from '../pages/Posts/PostDetail';
+import EditPost from '../pages/Posts/EditPost';
 import EditUser from '../pages/EditUser';
 
 function Routes (props) {

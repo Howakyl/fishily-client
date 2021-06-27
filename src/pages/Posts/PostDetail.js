@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Spinner from "../components/UI/Spinner";
-import PostModel from "../models/post";
+import Spinner from "../../components/UI/Spinner";
+import PostModel from "../../models/post";
 import { Redirect, Link, withRouter } from "react-router-dom";
 import "./PostDetail.css";
 
