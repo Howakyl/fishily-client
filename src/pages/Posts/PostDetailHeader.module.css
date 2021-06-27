@@ -1,10 +1,13 @@
 .postHeaderContainer {
     display: flex;
     flex-direction: row;
+    margin-top: 2rem;
+    background-color: steelblue;
+    width: 70%;
 }
 
 .postImg {
-    width: 400px;
+    width: 350px;
     max-height: 300px;
     border-radius: 10px;
     background-color: #FFFFFF;
