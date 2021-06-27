@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Spinner from "../components/UI/Spinner";
-import UserModel from "../models/user";
-import UserCard from "../components/UserCard";
+import Spinner from "../../components/UI/Spinner";
+import UserModel from "../../models/user";
+import UserCard from "../../components/UserCard";
 import "./UserList.css";
 
 const UserList = (props) => {
