@@ -3,6 +3,7 @@ import Spinner from "../../components/UI/Spinner";
 import PostModel from "../../models/post";
 import { Redirect, Link, withRouter } from "react-router-dom";
 import "./PostDetail.css";
+import PostDetailHeader from "./PostDetailHeader";
 
 const PostDetail = (props) => {
   const [loading, setLoading] = useState(true);
@@ -58,37 +59,38 @@ const PostDetail = (props) => {
 
   if (!loading) {
     return (
-      <div className="container">
-        <div className="post-detail-container">
-          <img
-            src={post.image}
-            alt="fish"
-            className="post-detail-img img-fluid"
-          />
-          <section className="post-detail-info">
-            <div className="user-info">
-              <Link to={`/users/${post.user._id}`}>
-                <img
-                  className="post-detail-user-img img-fluid"
-                  src={post.user.picture}
-                  alt={props.user.username}
-                />
-              </Link>
-              <Link to={`/users/${post.user._id}`}>
-                <p className="post-detail-username">{post.user.username}</p>
-              </Link>
-            </div>
-            <h2>{post.title}</h2>
-            <h5>
-              <em>Fish Caught:</em> {post.fish}
-            </h5>
-            <hr />
-            <p className="post-detail-description">{post.description}</p>
-            <small>Caught at: {post.locationName}</small>
-            <div className="post-detail-buttons">{renderBtns()}</div>
-          </section>
-        </div>
-      </div>
+      // <div>
+      //   <div className="post-detail-container">
+      //     <img
+      //       src={post.image}
+      //       alt="fish"
+      //       className="post-detail-img img-fluid"
+      //     />
+      //     <section className="post-detail-info">
+      //       <div className="user-info">
+      //         <Link to={`/users/${post.user._id}`}>
+      //           <img
+      //             className="post-detail-user-img img-fluid"
+      //             src={post.user.picture}
+      //             alt={props.user.username}
+      //           />
+      //         </Link>
+      //         <Link to={`/users/${post.user._id}`}>
+      //           <p className="post-detail-username">{post.user.username}</p>
+      //         </Link>
+      //       </div>
+      //       <h2>{post.title}</h2>
+      //       <h5>
+      //         <em>Fish Caught:</em> {post.fish}
+      //       </h5>
+      //       <hr />
+      //       <p className="post-detail-description">{post.description}</p>
+      //       <small>Caught at: {post.locationName}</small>
+      //       <div className="post-detail-buttons">{renderBtns()}</div>
+      //     </section>
+      //   </div>
+      // </div>
+      <PostDetailHeader post={post} />
     );
   } else {
     return <Spinner />;
