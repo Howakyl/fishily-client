@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PostModel from "../models/post";
+import PostModel from "../../models/post";
 import { Redirect } from "react-router-dom";
-import NewPostMap from "../components/NewPostMap";
+import NewPostMap from "../../components/NewPostMap";
 
 const NewPost = (props) => {
   const [title, setTitle] = useState("");
