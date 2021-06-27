@@ -3,7 +3,7 @@ import { Switch , Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import UserList from '../pages/Users/UserList';
 import UserShow from '../pages/UserShow';
-import EditUser from '../pages/EditUser';
+import EditUser from '../pages/Users/EditUser';
 import SignUp from '../pages/SignUp';
 import LogIn from '../pages/LogIn';
 import PostList from '../pages/Posts/PostList';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Spinner from "../components/UI/Spinner";
-import UserModel from "../models/user";
+import Spinner from "../../components/UI/Spinner";
+import UserModel from "../../models/user";
 
 const EditUser = (props) => {
   const [isLoading, setLoading] = useState(true);
