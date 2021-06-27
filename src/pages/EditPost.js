@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/UI/Spinner";
 import PostModel from "../models/post";
 import "./EditPost.css";
 

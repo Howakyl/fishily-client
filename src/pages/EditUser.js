@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/UI/Spinner";
 import UserModel from "../models/user";
 
 const EditUser = (props) => {
