@@ -12,7 +12,7 @@ const PostDetailComments = (props) => {
 
   return (
     <div className={classes.commentsContainer}>
-      <h2>Comments</h2>
+      {/* <h2>Comments</h2> */}
       {props.comments.length > 0 ? (
         renderComments()
       ) : (
