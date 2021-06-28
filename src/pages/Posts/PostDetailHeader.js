@@ -4,7 +4,7 @@ import classes from "./PostDetailHeader.module.css";
 
 const PostDetailHeader = (props) => {
   return (
-    <div className={`container ${classes.postHeaderContainer}`}>
+    <div className={`${classes.postHeaderContainer}`}>
       <img
         src={props.post.image}
         alt="fish"
