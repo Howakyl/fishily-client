@@ -60,10 +60,10 @@ const PostDetail = (props) => {
 
   if (!loading) {
     return (
-      <>
+      <div className="postDetailContainer">
       <PostDetailHeader post={post} onRenderBtns={renderBtns} />
-      <PostDetailComments post={post} />
-      </>
+      <PostDetailComments comments={post.comments} />
+      </div>
     );
   } else {
     return <Spinner />;
