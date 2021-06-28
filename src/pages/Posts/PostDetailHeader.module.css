@@ -21,6 +21,10 @@
 /* .userInfo {
 } */
 
+.fishCaught {
+    margin-top: 15px;
+}
+
 .postDetailButtons {
     display: flex;
     justify-content: space-evenly;
@@ -34,6 +38,7 @@
 .postUser {
     display: inline-block;
     margin-left: 15px;
+    text-decoration: underline;
 }
 
 .userInfo img {

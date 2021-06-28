@@ -24,7 +24,7 @@ const PostDetailHeader = (props) => {
             <p className={classes.postUser}>{props.post.user.username}</p>
           </Link>
         </div>
-        <h5>
+        <h5 className={classes.fishCaught}>
           <em>Fish Caught:</em> {props.post.fish}
         </h5>
         <hr />
