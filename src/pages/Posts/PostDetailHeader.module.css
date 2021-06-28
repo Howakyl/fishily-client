@@ -1,9 +1,13 @@
 .postHeaderContainer {
     display: flex;
     flex-direction: row;
+    justify-content:flex-start;
     margin-top: 2rem;
-    background-color: steelblue;
-    width: 70%;
+    padding: 1.5rem;
+    background-color: #EEEEEE;
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .postImg {
@@ -12,6 +16,24 @@
     border-radius: 10px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* .userInfo {
+} */
+
+.postDetailButtons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.description {
+    margin-left: 60px;
+}
+
+.postUser {
+    display: inline-block;
+    margin-left: 15px;
 }
 
 .userInfo img {

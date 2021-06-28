@@ -90,7 +90,7 @@ const PostDetail = (props) => {
       //     </section>
       //   </div>
       // </div>
-      <PostDetailHeader post={post} />
+      <PostDetailHeader post={post} onRenderBtns={renderBtns} />
     );
   } else {
     return <Spinner />;
