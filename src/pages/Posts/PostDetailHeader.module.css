@@ -37,6 +37,7 @@
 
 .postUser {
     display: inline-block;
+    font-size: 20px;
     margin-left: 15px;
     text-decoration: underline;
 }
@@ -46,4 +47,11 @@
     height: 60px;
     border-radius: 50%;
     border: #234a35 2px solid;
+}
+
+.postDescription {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 5px;
+    overflow: hidden;
 }

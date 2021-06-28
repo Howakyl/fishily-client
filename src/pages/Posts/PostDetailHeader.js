@@ -28,7 +28,7 @@ const PostDetailHeader = (props) => {
           <em>Fish Caught:</em> {props.post.fish}
         </h5>
         <hr />
-        <p className="post-detail-description">{props.post.description}</p>
+        <p className={classes.postDescription}>{props.post.description}</p>
         <small>Caught at: {props.post.locationName}</small>
         <div className={classes.postDetailButtons}>{props.onRenderBtns()}</div>
       </section>
