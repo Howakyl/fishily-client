@@ -3,7 +3,6 @@ import Comment from "../../components/Comments/Comment";
 import classes from "./PostDetailComments.module.css";
 
 const PostDetailComments = (props) => {
-  console.log(props.comments);
   const renderComments = () => {
     return props.comments.map((comment) => (
       <Comment comment={comment} key={comment._id} />
@@ -12,11 +11,10 @@ const PostDetailComments = (props) => {
 
   return (
     <div className={classes.commentsContainer}>
-      {/* <h2>Comments</h2> */}
       {props.comments.length > 0 ? (
         renderComments()
       ) : (
-        <h2>No comments (yet!)</h2>
+        <h2 className={classes.commentsHeader}>No comments (yet!)</h2>
       )}
     </div>
   );
