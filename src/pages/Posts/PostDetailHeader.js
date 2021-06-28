@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./PostDetailHeader.module.css";
 
 const PostDetailHeader = (props) => {
