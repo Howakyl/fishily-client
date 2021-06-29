@@ -6,7 +6,7 @@ const PostDetailComments = (props) => {
   const renderComments = () => {
     return props.comments.map((comment) => (
       <Comment comment={comment} key={comment._id} />
-    ));
+    )).reverse();
   };
 
   return (
