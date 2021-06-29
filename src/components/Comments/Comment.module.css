@@ -19,8 +19,17 @@
     margin-left: 10px;
 }
 
+.commentHeader {
+    display: flex;
+    margin: 0 5px 0 5px;
+    justify-content: space-between;
+}
+
 .commentUsername {
     display: inline-block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-weight: bold;    
+}
+
+.postedOn {
+    color: rgb(170, 169, 169);
 }
