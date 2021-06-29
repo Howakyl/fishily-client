@@ -1,6 +1,7 @@
 .postDetailContainer {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .post-detail-edit-btn a {
