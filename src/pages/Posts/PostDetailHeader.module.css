@@ -1,7 +1,7 @@
 .postHeaderContainer {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content:flex-start;
     margin-top: 2rem;
     padding: 1.5rem;
@@ -61,5 +61,16 @@
 
     .description {
         margin-top: 1rem;
+    }
+}
+
+@media (max-width: 810px) {
+    .postHeaderContainer {
+        flex-wrap: wrap;
+    }
+
+    .description {
+        margin-top: 1rem;
+        margin-left: 0;
     }
 }
