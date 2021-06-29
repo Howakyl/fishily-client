@@ -4,11 +4,14 @@
     margin-bottom: 15px;
 }
 
+.commentContainer a {
+    height: 40px;
+}
+
 .userImg {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #234a35;
 }
 
 .commentInfo {
