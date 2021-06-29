@@ -1,6 +1,7 @@
 .postHeaderContainer {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content:flex-start;
     margin-top: 2rem;
     padding: 1.5rem;
@@ -54,6 +55,11 @@
 
 @media (max-width: 1140px) {
     .postHeaderContainer {
-        width: auto;
+        width: 80%;
+        justify-content: center;
+    }
+
+    .description {
+        margin-top: 1rem;
     }
 }
