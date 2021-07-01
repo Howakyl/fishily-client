@@ -4,9 +4,9 @@ import classes from "./PostDetailComments.module.css";
 
 const PostDetailComments = (props) => {
   const renderComments = () => {
-    return props.comments.map((comment) => (
-      <Comment comment={comment} key={comment._id} />
-    )).reverse();
+    return props.comments
+      .map((comment) => <Comment comment={comment} key={comment._id} />)
+      .reverse();
   };
 
   return (
@@ -14,7 +14,10 @@ const PostDetailComments = (props) => {
       {props.comments.length > 0 ? (
         renderComments()
       ) : (
-        <h2 className={classes.commentsHeader}>No comments (yet!)</h2>
+        <div className={classes.noCommentsContainer}>
+          <h2 className={classes.commentsHeader}>No comments (yet!)</h2>
+          <button className={`btn btn-primary`}>Be the first to comment</button>
+        </div>
       )}
     </div>
   );
