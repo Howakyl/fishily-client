@@ -62,7 +62,7 @@ const PostDetail = (props) => {
     return (
       <div className="postDetailContainer">
       <PostDetailHeader post={post} onRenderBtns={renderBtns} />
-      <PostDetailComments comments={post.comments} />
+      <PostDetailComments comments={post.comments} post={post} user={props.user} />
       </div>
     );
   } else {

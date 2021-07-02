@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CommentModel from "../../models/comment";
 import Modal from "../../components/UI/Modal";
 import Input from "../../components/UI/Input";
 import Comment from "../../components/Comments/Comment";
@@ -25,7 +26,7 @@ const PostDetailComments = (props) => {
       console.log("cleanup");
       clearTimeout(identifier);
     };
-  }, [description]);
+  }, [description, props.comments]);
 
   const onShowModal = () => {
     setShowCommentModal(false);
@@ -39,10 +40,13 @@ const PostDetailComments = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     if (commentIsValid) {
       console.log(description, "IS VALID");
+      CommentModel.create(description, props.post._id, props.user._id);
     }
   };
+
   return (
     <div className={classes.commentsContainer}>
       {props.comments.length > 0 ? (
