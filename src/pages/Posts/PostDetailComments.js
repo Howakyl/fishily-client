@@ -44,6 +44,7 @@ const PostDetailComments = (props) => {
                   input={{
                     id: "descriptionInput",
                     type: "text",
+                    textarea: "true"
                   }}
                   label="Add a comment..."
                 />
