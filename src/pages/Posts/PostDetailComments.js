@@ -11,21 +11,21 @@ const PostDetailComments = (props) => {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log('checking validity')
-      if (description.length > 0 && description.length <=300) {
-        setCommentIsValid(true)
-        console.log('valid')
+      console.log("checking validity");
+      if (description.trim().length > 0 && description.trim().length <= 300) {
+        setCommentIsValid(true);
+        console.log("valid");
       } else {
-        setCommentIsValid(false)
-        console.log('IS invalid')
+        setCommentIsValid(false);
+        console.log("IS invalid");
       }
     }, 500);
 
     return () => {
-      console.log('cleanup')
-      clearTimeout(identifier)
-    }
-  },[description])
+      console.log("cleanup");
+      clearTimeout(identifier);
+    };
+  }, [description]);
 
   const onShowModal = () => {
     setShowCommentModal(false);
@@ -40,7 +40,7 @@ const PostDetailComments = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (commentIsValid) {
-      console.log(description, 'IS VALID')
+      console.log(description, "IS VALID");
     }
   };
   return (
