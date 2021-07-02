@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Modal from "../../components/UI/Modal";
+import Input from "../../components/UI/Input";
 import Comment from "../../components/Comments/Comment";
 import classes from "./PostDetailComments.module.css";
 
 const PostDetailComments = (props) => {
   const [showCommentModal, setShowCommentModal] = useState(false);
-  const [description, setDescription ] = useState("");
+  const [description, setDescription] = useState("");
 
   const onShowModal = () => {
     setShowCommentModal(false);
@@ -19,7 +20,7 @@ const PostDetailComments = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <div className={classes.commentsContainer}>
@@ -39,7 +40,17 @@ const PostDetailComments = (props) => {
           {showCommentModal && (
             <Modal onShowModal={onShowModal} className={classes.commentModal}>
               <form onSubmit={submitHandler}>
-                <input type="text" />
+                <Input
+                  input={{
+                    id: "descriptionInput",
+                    type: "text",
+                  }}
+                  label="Add a comment..."
+                />
+                <div>
+                  <button className={`btn btn-primary`}>Cancel</button>
+                  <button className={`btn btn-primary`}>Send</button>
+                </div>
               </form>
             </Modal>
           )}
