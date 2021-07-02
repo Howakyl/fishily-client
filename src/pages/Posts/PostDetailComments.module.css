@@ -35,10 +35,15 @@
 }
 
 .openCommentBtn {
-    border: none;
+    border: 1px solid rgb(194, 190, 190);
     float: right;
-    background-color: #fff;
+    padding: 5px 10px 5px 10px;
     border-radius: 5px;
+    color: rgb(95, 94, 94);
+}
+
+.openCommentBtn i {
+    font-size: 20px;
 }
 
 .openCommentBtn small {
@@ -51,5 +56,6 @@
         margin-left: 0;
         margin-top: 1rem;
         margin-bottom: 3rem;
+        flex-direction: column-reverse;
     }
 }
