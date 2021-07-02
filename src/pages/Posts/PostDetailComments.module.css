@@ -34,6 +34,17 @@
     margin-right: 10px;
 }
 
+.openCommentBtn {
+    border: none;
+    float: right;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.openCommentBtn small {
+    margin-right: 10px;
+}
+
 @media (max-width: 1140px) {
     .commentsContainer {
         width: 80%;

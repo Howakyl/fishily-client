@@ -50,7 +50,19 @@ const PostDetailComments = (props) => {
   return (
     <div className={classes.commentsContainer}>
       {props.comments.length > 0 ? (
-        renderComments()
+        <div>
+          {renderComments()}
+          <button
+            type="button"
+            className={classes.openCommentBtn}
+            onClick={() => {
+              setShowCommentModal(true);
+            }}
+          >
+            <small>Comment</small>
+            <i className="far fa-comment"></i>
+          </button>
+        </div>
       ) : (
         <div className={classes.noCommentsContainer}>
           <h2 className={classes.commentsHeader}>No comments (yet!)</h2>
@@ -62,36 +74,37 @@ const PostDetailComments = (props) => {
           >
             Be the first to comment
           </button>
-          {showCommentModal && (
-            <Modal onShowModal={onShowModal} className={classes.commentModal}>
-              <form onSubmit={submitHandler}>
-                <Input
-                  input={{
-                    id: "descriptionInput",
-                    type: "text",
-                    textarea: "true",
-                  }}
-                  label="Add a comment..."
-                  onChange={(e) => setDescription(e.target.value)}
-                  value={description}
-                />
-                <small>{description.length}/300</small>
-                <div className={classes.buttonContainer}>
-                  <button
-                    className={`btn btn-primary ${classes.cancelButton}`}
-                    type="button"
-                    onClick={() => setShowCommentModal(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button className={`btn btn-primary`} type="submit">
-                    Send
-                  </button>
-                </div>
-              </form>
-            </Modal>
-          )}
         </div>
+      )}
+      {showCommentModal && (
+        <Modal onShowModal={onShowModal} className={classes.commentModal}>
+          <form onSubmit={submitHandler}>
+            <Input
+              input={{
+                id: "descriptionInput",
+                type: "text",
+                textarea: "true",
+              }}
+              placeholder="Add a comment..."
+              // label="Add a comment..."
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+            />
+            <small>{description.length}/300</small>
+            <div className={classes.buttonContainer}>
+              <button
+                className={`btn btn-primary ${classes.cancelButton}`}
+                type="button"
+                onClick={() => setShowCommentModal(false)}
+              >
+                Cancel
+              </button>
+              <button className={`btn btn-primary`} type="submit">
+                Send
+              </button>
+            </div>
+          </form>
+        </Modal>
       )}
     </div>
   );

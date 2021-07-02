@@ -12,12 +12,14 @@ const Input = (props) => {
           {...props.input}
           className={`${props.className} form-control`}
           onChange={props.onChange}
+          placeholder={props.placeholder}
         />
       ) : (
         <input
           {...props.input}
           className={`${props.className} form-control`}
           onChange={props.onChange}
+          placeholder={props.placeholder}
         />
       )}
     </div>
