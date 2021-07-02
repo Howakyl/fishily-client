@@ -8,9 +8,17 @@ const Input = (props) => {
         {props.label}
       </label>
       {props.input.textarea === "true" ? (
-        <textarea {...props.input} className={`${props.className} form-control`}/>
+        <textarea
+          {...props.input}
+          className={`${props.className} form-control`}
+          onChange={props.onChange}
+        />
       ) : (
-        <input {...props.input} className={`${props.className} form-control`} />
+        <input
+          {...props.input}
+          className={`${props.className} form-control`}
+          onChange={props.onChange}
+        />
       )}
     </div>
   );
