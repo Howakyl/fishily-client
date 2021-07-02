@@ -22,8 +22,16 @@
 }
 
 .commentModal form {
-    /* color: #234a35; */
     margin: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancelButton {
+    margin-right: 10px;
 }
 
 @media (max-width: 1140px) {

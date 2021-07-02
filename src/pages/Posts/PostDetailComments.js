@@ -12,7 +12,7 @@ const PostDetailComments = (props) => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("checking validity");
-      if (description.trim().length > 0 && description.trim().length <= 300) {
+      if (description.length > 0 && description.length <= 300) {
         setCommentIsValid(true);
         console.log("valid");
       } else {
@@ -71,9 +71,10 @@ const PostDetailComments = (props) => {
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                 />
-                <div>
+                <small>{description.length}/300</small>
+                <div className={classes.buttonContainer}>
                   <button
-                    className={`btn btn-primary`}
+                    className={`btn btn-primary ${classes.cancelButton}`}
                     type="button"
                     onClick={() => setShowCommentModal(false)}
                   >
