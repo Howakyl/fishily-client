@@ -54,13 +54,13 @@ const PostDetailComments = (props) => {
           {renderComments()}
           <button
             type="button"
-            className={classes.openCommentBtn}
+            className={`${classes.openCommentBtn} btn btn primary`}
             onClick={() => {
               setShowCommentModal(true);
             }}
           >
             <small>Comment</small>
-            <i className="far fa-comment"></i>
+            <i className="fas fa-comment"></i>
           </button>
         </div>
       ) : (

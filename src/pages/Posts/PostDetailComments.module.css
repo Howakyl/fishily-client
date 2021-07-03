@@ -35,11 +35,12 @@
 }
 
 .openCommentBtn {
-    border: 1px solid rgb(194, 190, 190);
     float: right;
-    padding: 5px 10px 5px 10px;
-    border-radius: 5px;
-    color: rgb(95, 94, 94);
+    color: #fff;
+}
+
+.openCommentBtn:hover {
+    color: #fff;
 }
 
 .openCommentBtn i {
