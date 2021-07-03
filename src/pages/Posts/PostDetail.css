@@ -3,9 +3,14 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
 
 .post-detail-edit-btn a {
     color: white ;
     text-decoration: none;
+}
+
+.postHeader {
+    align-self: flex-start;
 }

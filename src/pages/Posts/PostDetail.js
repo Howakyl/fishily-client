@@ -61,7 +61,7 @@ const PostDetail = (props) => {
   if (!loading) {
     return (
       <div className="postDetailContainer">
-      <PostDetailHeader post={post} onRenderBtns={renderBtns} />
+      <PostDetailHeader post={post} onRenderBtns={renderBtns} className="postHeader" />
       <PostDetailComments comments={post.comments} post={post} user={props.user} />
       </div>
     );

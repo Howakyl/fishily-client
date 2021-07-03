@@ -86,7 +86,6 @@ const PostDetailComments = (props) => {
                 textarea: "true",
               }}
               placeholder="Add a comment..."
-              // label="Add a comment..."
               onChange={(e) => setDescription(e.target.value)}
               value={description}
             />
