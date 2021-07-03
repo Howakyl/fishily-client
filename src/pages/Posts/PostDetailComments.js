@@ -43,7 +43,9 @@ const PostDetailComments = (props) => {
 
     if (commentIsValid) {
       console.log(description, "IS VALID");
-      CommentModel.create(description, props.post._id, props.user._id);
+      CommentModel.create(description, props.post._id, props.user._id).then(() => {
+        setShowCommentModal(false);
+      });
     }
   };
 
