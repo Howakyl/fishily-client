@@ -49,7 +49,7 @@ const PostDetailComments = (props) => {
 
   return (
     <div className={classes.commentsContainer}>
-      {props.comments.length > 0 ? (
+      {props.comments && props.comments.length > 0 ? (
         <div className={classes.commentsContainerInner}>
           {renderComments()}
           <button

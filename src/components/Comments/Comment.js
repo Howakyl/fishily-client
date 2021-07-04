@@ -36,84 +36,88 @@ const Comment = (props) => {
   }
 
   return (
-    <div className={classes.commentContainer}>
-      <Link to={`/users/${props.comment.user._id}`}>
-        <img
-          src={props.comment.user.picture}
-          alt={props.comment.user.username}
-          className={classes.userImg}
-        />
-      </Link>
-      <div className={classes.commentInfo}>
-        <section className={classes.commentHeader}>
+    <>
+      {props.comment.user && (
+        <div className={classes.commentContainer}>
           <Link to={`/users/${props.comment.user._id}`}>
-            <p className={classes.commentUsername}>
-              {props.comment.user.username}
-            </p>
+            <img
+              src={props.comment.user.picture}
+              alt={props.comment.user.username}
+              className={classes.userImg}
+            />
           </Link>
-          <section className={classes.optionsContainer}>
-            <small className={classes.postedOn}>{getDiff(diff)}</small>
-            {props.comment.user._id === props.user._id && (
-              <button
-                className={classes.optionsBtn}
-                type="button"
-                onClick={onShowTooltip}
-              >
-                <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
-              </button>
-            )}
-
-            {showTooltip && (
-              <Tooltip onShowTooltip={onShowTooltip}>
-                <button
-                  type="button"
-                  className={classes.tooltipDelete}
-                  onClick={() => {
-                    onShowDeleteModal();
-                    onShowTooltip();
-                  }}
-                >
-                  <i className="fas fa-trash-alt"></i>
-                  <small>Delete</small>
-                </button>
-              </Tooltip>
-            )}
-
-            {showDeleteModal && (
-              <Modal onShowModal={onShowDeleteModal}>
-                <h4 className={classes.deleteModalTitle}>
-                  Are you sure you want to delete your comment?
-                </h4>
-                <div className={classes.buttonContainer}>
+          <div className={classes.commentInfo}>
+            <section className={classes.commentHeader}>
+              <Link to={`/users/${props.comment.user._id}`}>
+                <p className={classes.commentUsername}>
+                  {props.comment.user.username}
+                </p>
+              </Link>
+              <section className={classes.optionsContainer}>
+                <small className={classes.postedOn}>{getDiff(diff)}</small>
+                {props.comment.user._id === props.user._id && (
                   <button
-                    className={`btn btn-primary ${classes.cancelButton}`}
+                    className={classes.optionsBtn}
                     type="button"
-                    onClick={() => {
-                      setShowDeleteModal();
-                    }}
+                    onClick={onShowTooltip}
                   >
-                    Cancel
+                    <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
                   </button>
-                  <button
-                    className={`btn btn-primary ${classes.confirmButton}`}
-                    type="button"
-                    onClick={() => {
-                      props.onDeleteComment(props.comment._id);
-                      setShowDeleteModal();
-                    }}
-                  >
-                    Confirm
-                  </button>
-                </div>
-              </Modal>
-            )}
-          </section>
-        </section>
-        <p className={classes.commentDescription}>
-          {props.comment.description}
-        </p>
-      </div>
-    </div>
+                )}
+
+                {showTooltip && (
+                  <Tooltip onShowTooltip={onShowTooltip}>
+                    <button
+                      type="button"
+                      className={classes.tooltipDelete}
+                      onClick={() => {
+                        onShowDeleteModal();
+                        onShowTooltip();
+                      }}
+                    >
+                      <i className="fas fa-trash-alt"></i>
+                      <small>Delete</small>
+                    </button>
+                  </Tooltip>
+                )}
+
+                {showDeleteModal && (
+                  <Modal onShowModal={onShowDeleteModal}>
+                    <h4 className={classes.deleteModalTitle}>
+                      Are you sure you want to delete your comment?
+                    </h4>
+                    <div className={classes.buttonContainer}>
+                      <button
+                        className={`btn btn-primary ${classes.cancelButton}`}
+                        type="button"
+                        onClick={() => {
+                          setShowDeleteModal();
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className={`btn btn-primary ${classes.confirmButton}`}
+                        type="button"
+                        onClick={() => {
+                          props.onDeleteComment(props.comment._id);
+                          setShowDeleteModal();
+                        }}
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </Modal>
+                )}
+              </section>
+            </section>
+            <p className={classes.commentDescription}>
+              {props.comment.description}
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 export default Comment;
