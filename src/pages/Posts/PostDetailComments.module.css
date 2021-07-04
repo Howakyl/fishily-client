@@ -51,12 +51,21 @@
     margin-right: 10px;
 }
 
-@media (max-width: 1140px) {
+@media only screen and (max-width: 1140px) {
     .commentsContainer {
         width: 80%;
         margin-left: 0;
         margin-top: 1rem;
         margin-bottom: 3rem;
+    }
+
+    .commentsContainerInner {
+        display: flex;
         flex-direction: column-reverse;
+    }
+
+    .openCommentBtn {
+        align-self: flex-end;
+        margin-bottom: 10px;
     }
 }

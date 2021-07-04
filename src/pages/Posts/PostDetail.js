@@ -13,7 +13,6 @@ const PostDetail = (props) => {
   const [newComment, setNewComment] = useState({});
 
   const onAddComment = (comment) => {
-    console.log('new comment: ', comment);
     setNewComment(comment);
   }
 
