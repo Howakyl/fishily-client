@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../../components/UI/Spinner";
 import PostModel from "../../models/post";
+import CommentModel from "../../models/comment";
 import { Redirect, Link, withRouter } from "react-router-dom";
 import "./PostDetail.css";
 import PostDetailHeader from "./PostDetailHeader";
@@ -10,18 +11,17 @@ const PostDetail = (props) => {
   const [loading, setLoading] = useState(true);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
   const [post, setPost] = useState({});
-  const [newComment, setNewComment] = useState({});
+  const [newComment, setNewComment] = useState("");
 
   const onAddComment = (comment) => {
-    setNewComment(comment);
-  }
+    setNewComment(comment._id);
+  };
 
   useEffect(() => {
     const postId = props.match.params.id;
     PostModel.getOne(postId).then((data) => {
       setPost(data.data.post);
       setLoading(false);
-      
     });
   }, [props.match.params.id, newComment]);
 
@@ -30,6 +30,14 @@ const PostDetail = (props) => {
       setRedirectToPosts(true);
     });
   };
+
+  const deleteComment = (id) => {
+    CommentModel.delete(id).then((res) => {
+      setNewComment(id);
+    });
+  };
+
+  console.log("test");
 
   function confirmPostDelete(post) {
     const confirmDelete = window.confirm(
@@ -67,8 +75,18 @@ const PostDetail = (props) => {
   if (!loading) {
     return (
       <div className="postDetailContainer">
-      <PostDetailHeader post={post} onRenderBtns={renderBtns} className="postHeader" />
-      <PostDetailComments comments={post.comments} post={post} user={props.user} onAddComment={onAddComment} />
+        <PostDetailHeader
+          post={post}
+          onRenderBtns={renderBtns}
+          className="postHeader"
+        />
+        <PostDetailComments
+          comments={post.comments}
+          post={post}
+          user={props.user}
+          onAddComment={onAddComment}
+          onDeleteComment={deleteComment}
+        />
       </div>
     );
   } else {

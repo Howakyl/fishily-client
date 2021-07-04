@@ -59,7 +59,14 @@ const Comment = (props) => {
 
             {showTooltip && (
               <Tooltip onShowTooltip={onShowTooltip}>
-                <button type="button" className={classes.tooltipDelete}>
+                <button
+                  type="button"
+                  className={classes.tooltipDelete}
+                  onClick={() => {
+                    props.onDeleteComment(props.comment._id);
+                    onShowTooltip()
+                  }}
+                >
                   <i className="fas fa-trash-alt"></i>
                   <small>Delete</small>
                 </button>
