@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 let endPoint;
 
@@ -9,16 +9,21 @@ if (process.env.NODE_ENV === "production") {
 }
 
 class CommentModel {
-
   // CREATE comment
   static create = (comment, postId, userId) => {
     let data = {
       description: comment,
-      user: userId
-    }
+      user: userId,
+    };
     let request = axios.post(`${endPoint}/${postId}`, data);
     return request;
-  }
+  };
+
+  // DELETE comment
+  static delete = (commentId) => {
+    let request = axios.delete(`${endPoint}/${commentId}`);
+    return request;
+  };
 }
 
 export default CommentModel;
