@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Tooltip from "../UI/Tooltip";
 import classes from "./Comment.module.css";
 
 const Comment = (props) => {
+  const [showTooltip, setShowTooltip] = useState(false);
   const date = new Date(props.comment.createdAt);
   const today = new Date();
   let diff = Math.abs(today - date);
@@ -23,6 +25,10 @@ const Comment = (props) => {
     }
   }
 
+  function onShowTooltip() {
+    setShowTooltip(!showTooltip);
+  }
+
   return (
     <div className={classes.commentContainer}>
       <Link to={`/users/${props.comment.user._id}`}>
@@ -41,8 +47,17 @@ const Comment = (props) => {
           </Link>
           <section className={classes.optionsContainer}>
             <small className={classes.postedOn}>{getDiff(diff)}</small>
-            <button className={classes.optionsBtn} type="button">
+            <button
+              className={classes.optionsBtn}
+              type="button"
+              onClick={onShowTooltip}
+            >
               <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
+              {showTooltip && (
+                <Tooltip>
+                  <p>this is a tooltip</p>
+                </Tooltip>
+              )}
             </button>
           </section>
         </section>
