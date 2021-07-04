@@ -53,15 +53,15 @@ const Comment = (props) => {
               onClick={onShowTooltip}
             >
               <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
-              {showTooltip && (
-                <Tooltip>
-                  <div className={classes.tooltipDelete}>
-                    <i className="fas fa-trash-alt"></i>
-                    <small>Delete</small>
-                  </div>
-                </Tooltip>
-              )}
             </button>
+            {showTooltip && (
+              <Tooltip onShowTooltip={onShowTooltip}>
+                <button type="button" className={classes.tooltipDelete}>
+                  <i className="fas fa-trash-alt"></i>
+                  <small>Delete</small>
+                </button>
+              </Tooltip>
+            )}
           </section>
         </section>
         <p className={classes.commentDescription}>
