@@ -25,3 +25,15 @@
 .tooltipBackdrop:hover {
     cursor: initial;
 }
+
+@media only screen and (max-width: 1140px) {
+    .tooltip {
+        right: 13%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .tooltip {
+        right: 15%;
+    }
+}

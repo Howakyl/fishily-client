@@ -55,10 +55,10 @@ const Comment = (props) => {
               <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
               {showTooltip && (
                 <Tooltip>
-                  <button type="button" className={classes.tooltipDelete}>
+                  <div className={classes.tooltipDelete}>
                     <i className="fas fa-trash-alt"></i>
                     <small>Delete</small>
-                  </button>
+                  </div>
                 </Tooltip>
               )}
             </button>
