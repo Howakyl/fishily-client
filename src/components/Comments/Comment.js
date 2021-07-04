@@ -39,7 +39,12 @@ const Comment = (props) => {
               {props.comment.user.username}
             </p>
           </Link>
-          <small className={classes.postedOn}>{getDiff(diff)}</small>
+          <section className={classes.optionsContainer}>
+            <small className={classes.postedOn}>{getDiff(diff)}</small>
+            <button className={classes.optionsBtn} type="button">
+              <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
+            </button>
+          </section>
         </section>
         <p className={classes.commentDescription}>
           {props.comment.description}
