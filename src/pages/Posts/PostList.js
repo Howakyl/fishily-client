@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PostCard from "../components/PostCard";
-import FishMap from "../components/FishMap";
-import Spinner from "../components/Spinner";
-import PostModel from "../models/post";
+import PostCard from "../../components/PostCard";
+import FishMap from "../../components/FishMap";
+import Spinner from "../../components/UI/Spinner";
+import PostModel from "../../models/post";
 import "./PostList.css";
 
 const PostList = (props) => {

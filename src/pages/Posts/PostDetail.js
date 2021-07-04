@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Spinner from "../components/Spinner";
-import PostModel from "../models/post";
+import Spinner from "../../components/UI/Spinner";
+import PostModel from "../../models/post";
+import CommentModel from "../../models/comment";
 import { Redirect, Link, withRouter } from "react-router-dom";
 import "./PostDetail.css";
+import PostDetailHeader from "./PostDetailHeader";
+import PostDetailComments from "./PostDetailComments";
 
 const PostDetail = (props) => {
   const [loading, setLoading] = useState(true);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
   const [post, setPost] = useState({});
+  const [newComment, setNewComment] = useState("");
+
+  const onAddComment = (comment) => {
+    setNewComment(comment._id);
+  };
 
   useEffect(() => {
     const postId = props.match.params.id;
@@ -15,11 +23,17 @@ const PostDetail = (props) => {
       setPost(data.data.post);
       setLoading(false);
     });
-  }, [props.match.params.id]);
+  }, [props.match.params.id, newComment]);
 
   const deletePost = (id) => {
     PostModel.delete(id).then((res) => {
       setRedirectToPosts(true);
+    });
+  };
+
+  const deleteComment = (id) => {
+    CommentModel.delete(id).then((res) => {
+      setNewComment(id);
     });
   };
 
@@ -58,36 +72,19 @@ const PostDetail = (props) => {
 
   if (!loading) {
     return (
-      <div className="container">
-        <div className="post-detail-container">
-          <img
-            src={post.image}
-            alt="fish"
-            className="post-detail-img img-fluid"
-          />
-          <section className="post-detail-info">
-            <div className="user-info">
-              <Link to={`/users/${post.user._id}`}>
-                <img
-                  className="post-detail-user-img img-fluid"
-                  src={post.user.picture}
-                  alt={props.user.username}
-                />
-              </Link>
-              <Link to={`/users/${post.user._id}`}>
-                <p className="post-detail-username">{post.user.username}</p>
-              </Link>
-            </div>
-            <h2>{post.title}</h2>
-            <h5>
-              <em>Fish Caught:</em> {post.fish}
-            </h5>
-            <hr />
-            <p className="post-detail-description">{post.description}</p>
-            <small>Caught at: {post.locationName}</small>
-            <div className="post-detail-buttons">{renderBtns()}</div>
-          </section>
-        </div>
+      <div className="postDetailContainer">
+        <PostDetailHeader
+          post={post}
+          onRenderBtns={renderBtns}
+          className="postHeader"
+        />
+        <PostDetailComments
+          comments={post.comments}
+          post={post}
+          user={props.user}
+          onAddComment={onAddComment}
+          onDeleteComment={deleteComment}
+        />
       </div>
     );
   } else {

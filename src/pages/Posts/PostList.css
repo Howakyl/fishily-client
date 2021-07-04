@@ -41,13 +41,17 @@
 
 .mapBoxContainer {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-top: 1px solid #234a35;
     max-height: 60vh;
 }
 
 @media only screen and (min-width: 1077px) {
     .postList-wrapper {
         display: flex;
+    }
+
+    .mapBoxContainer {
+        margin-top: 2.5rem;
+        margin-left: 20px;
     }
 
     #mapContainer {
@@ -66,6 +70,7 @@
 
     .mapBoxContainer {
         width: 100vw !important;
+        border-top: 1px solid #234a35;
     }
 }
 

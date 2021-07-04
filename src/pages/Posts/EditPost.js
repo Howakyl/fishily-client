@@ -1,27 +1,37 @@
-import React, { useState } from "react";
-import PostModel from "../models/post";
-import { Redirect } from "react-router-dom";
-import NewPostMap from "../components/NewPostMap";
+import React, { useEffect, useState } from "react";
+import Spinner from "../../components/UI/Spinner";
+import PostModel from "../../models/post";
+import "./EditPost.css";
 
-const NewPost = (props) => {
+const EditPost = (props) => {
+  const [isLoading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [fish, setFish] = useState("");
   const [locationName, setLocationName] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const [image, setImage] = useState(
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png"
-  );
-  const [redirectToPosts, setRedirectToPosts] = useState(false);
-  
-  const onGetCoordinates = (coordinates) => {
-    setLng(coordinates.longitude)
-    setLat(coordinates.latitude)
-  }
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    const postId = props.match.params.id;
+    PostModel.getOne(postId).then((data) => {
+      const res = data.data.post;
+      setTitle(res.title);
+      setDescription(res.description);
+      setFish(res.fish);
+      setLocationName(res.locationName);
+      setLat(res.lat);
+      setLng(res.lng);
+      setImage(res.image);
+      setLoading(false);
+    });
+  }, [props.match.params.id]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    const postId = props.match.params.id;
+
     const formData = {
       title: title,
       description: description,
@@ -32,18 +42,18 @@ const NewPost = (props) => {
       image: image,
     };
 
-    PostModel.create(formData, props.user._id).then((res) => {
-      setRedirectToPosts(true);
+    PostModel.update(postId, formData).then((res) => {
+      props.history.push(`/posts/${postId}`);
     });
   };
 
-  if (redirectToPosts) {
-    return <Redirect to="/posts" />;
+  if (isLoading) {
+    return <Spinner />;
   }
   return (
     <div>
-      <form className="container" onSubmit={handleFormSubmit}>
-        <h1 className="newPost-title">submit a new post!</h1>
+      <form className="container editPost-form" onSubmit={handleFormSubmit}>
+        <h1>Edit your post!</h1>
         <div className="form-group">
           <label htmlFor="titleInput">Title</label>
           <small className="form-text text-muted">required</small>
@@ -82,13 +92,8 @@ const NewPost = (props) => {
           />
         </div>
 
-        <h4 className="newPostMapTitle">
-          Drag the pin to get your coordinates!
-        </h4>
-        <NewPostMap onGetCoordinates={onGetCoordinates} />
-
         <section className="row">
-          <div className="form-group col newPost-location">
+          <div className="form-group col editPost-location">
             <label htmlFor="locationInput">Where Was Your Catch?</label>
             <input
               onChange={(e) => setLocationName(e.target.value)}
@@ -100,9 +105,7 @@ const NewPost = (props) => {
             />
           </div>
           <div className="form-group col">
-            <label htmlFor="latInput">
-              Latitude<span className="text-muted"> - required</span>
-            </label>
+            <label htmlFor="latInput">Latitude</label>
             <input
               onChange={(e) => setLat(e.target.value)}
               type="number"
@@ -114,9 +117,7 @@ const NewPost = (props) => {
             />
           </div>
           <div className="form-group col">
-            <label htmlFor="lngInput">
-              Longitude<span className="text-muted"> - required</span>
-            </label>
+            <label htmlFor="lngInput">Longitude</label>
             <input
               onChange={(e) => setLng(e.target.value)}
               type="number"
@@ -141,12 +142,12 @@ const NewPost = (props) => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary newPostBtn">
-          Submit Post
+        <button type="submit" className="btn btn-primary">
+          Edit Post
         </button>
       </form>
     </div>
   );
 };
 
-export default NewPost;
+export default EditPost;

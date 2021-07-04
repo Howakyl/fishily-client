@@ -1,15 +1,15 @@
 import React from 'react';
 import { Switch , Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import UserList from '../pages/UserList';
-import UserShow from '../pages/UserShow';
+import UserList from '../pages/Users/UserList';
+import UserShow from '../pages/Users/UserShow';
+import EditUser from '../pages/Users/EditUser';
 import SignUp from '../pages/SignUp';
 import LogIn from '../pages/LogIn';
-import PostList from '../pages/PostList';
-import NewPost from '../pages/NewPost';
-import PostDetail from '../pages/PostDetail';
-import EditPost from '../pages/EditPost';
-import EditUser from '../pages/EditUser';
+import PostList from '../pages/Posts/PostList';
+import NewPost from '../pages/Posts/NewPost';
+import PostDetail from '../pages/Posts/PostDetail';
+import EditPost from '../pages/Posts/EditPost';
 
 function Routes (props) {
   return (
