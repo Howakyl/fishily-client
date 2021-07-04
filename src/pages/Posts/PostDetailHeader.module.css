@@ -1,7 +1,6 @@
 .postHeaderContainer {
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
     justify-content:flex-start;
     margin-top: 2rem;
     padding: 1.5rem;
@@ -31,6 +30,7 @@
 
 .description {
     margin-left: 60px;
+    width: 100%;
 }
 
 .postUser {
