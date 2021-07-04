@@ -30,7 +30,14 @@ const PostDetailComments = (props) => {
 
   const renderComments = () => {
     return props.comments
-      .map((comment) => <Comment comment={comment} key={comment._id} user={props.user} onDeleteComment={props.onDeleteComment} />)
+      .map((comment) => (
+        <Comment
+          comment={comment}
+          key={comment._id}
+          user={props.user}
+          onDeleteComment={props.onDeleteComment}
+        />
+      ))
       .reverse();
   };
 
@@ -52,16 +59,18 @@ const PostDetailComments = (props) => {
       {props.comments && props.comments.length > 0 ? (
         <div className={classes.commentsContainerInner}>
           {renderComments()}
-          <button
-            type="button"
-            className={`${classes.openCommentBtn} btn btn primary`}
-            onClick={() => {
-              setShowCommentModal(true);
-            }}
-          >
-            <small>Comment</small>
-            <i className="fas fa-comment"></i>
-          </button>
+          {props.user && (
+            <button
+              type="button"
+              className={`${classes.openCommentBtn} btn btn primary`}
+              onClick={() => {
+                setShowCommentModal(true);
+              }}
+            >
+              <small>Comment</small>
+              <i className="fas fa-comment"></i>
+            </button>
+          )}
         </div>
       ) : (
         <div className={classes.noCommentsContainer}>
