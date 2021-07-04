@@ -37,8 +37,6 @@ const PostDetail = (props) => {
     });
   };
 
-  console.log("test");
-
   function confirmPostDelete(post) {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete your post?"
