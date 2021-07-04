@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Tooltip from "../UI/Tooltip";
+import Modal from "../UI/Modal";
 import classes from "./Comment.module.css";
 
 const Comment = (props) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const date = new Date(props.comment.createdAt);
   const today = new Date();
   let diff = Math.abs(today - date);
@@ -23,6 +25,10 @@ const Comment = (props) => {
       // At least a year ago
       return (diff = `${Math.floor(diff / 36e5 / 24 / 365)}y`);
     }
+  }
+
+  function onShowDeleteModal() {
+    setShowDeleteModal(!showDeleteModal);
   }
 
   function onShowTooltip() {
@@ -63,14 +69,30 @@ const Comment = (props) => {
                   type="button"
                   className={classes.tooltipDelete}
                   onClick={() => {
-                    props.onDeleteComment(props.comment._id);
-                    onShowTooltip()
+                    onShowDeleteModal();
+                    onShowTooltip();
                   }}
                 >
                   <i className="fas fa-trash-alt"></i>
                   <small>Delete</small>
                 </button>
               </Tooltip>
+            )}
+
+            {showDeleteModal && (
+              <Modal onShowModal={onShowDeleteModal}>
+                <div className={classes.buttonContainer}>
+                  <button
+                    className={`btn btn-primary ${classes.cancelButton}`}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button className={`btn btn-primary`} type="submit">
+                    Send
+                  </button>
+                </div>
+              </Modal>
             )}
           </section>
         </section>
