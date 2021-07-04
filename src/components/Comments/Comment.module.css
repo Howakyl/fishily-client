@@ -69,6 +69,34 @@
     border: none;
 }
 
+/* DELETE MODAL STYLING */
+.deleteModalTitle {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 2.5rem;
+}
+
+.cancelButton {
+    margin-right: 10px;
+}
+
+.confirmButton {
+    background-color: rgb(190, 5, 5);
+    border: rgb(190, 5, 5);
+}
+
+.confirmButton:hover {
+    background-color: rgb(255, 0, 0);
+    border: red;
+}
+/* ///////////// */
+
 .tooltipDelete small {
     margin-left: 10px;
 }

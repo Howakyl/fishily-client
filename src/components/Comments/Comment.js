@@ -81,15 +81,28 @@ const Comment = (props) => {
 
             {showDeleteModal && (
               <Modal onShowModal={onShowDeleteModal}>
+                <h4 className={classes.deleteModalTitle}>
+                  Are you sure you want to delete your comment?
+                </h4>
                 <div className={classes.buttonContainer}>
                   <button
                     className={`btn btn-primary ${classes.cancelButton}`}
                     type="button"
+                    onClick={() => {
+                      setShowDeleteModal();
+                    }}
                   >
                     Cancel
                   </button>
-                  <button className={`btn btn-primary`} type="submit">
-                    Send
+                  <button
+                    className={`btn btn-primary ${classes.confirmButton}`}
+                    type="button"
+                    onClick={() => {
+                      props.onDeleteComment(props.comment._id);
+                      setShowDeleteModal();
+                    }}
+                  >
+                    Confirm
                   </button>
                 </div>
               </Modal>
