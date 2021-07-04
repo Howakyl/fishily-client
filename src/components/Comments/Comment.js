@@ -47,13 +47,16 @@ const Comment = (props) => {
           </Link>
           <section className={classes.optionsContainer}>
             <small className={classes.postedOn}>{getDiff(diff)}</small>
-            <button
-              className={classes.optionsBtn}
-              type="button"
-              onClick={onShowTooltip}
-            >
-              <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
-            </button>
+            {props.comment.user._id === props.user._id && (
+              <button
+                className={classes.optionsBtn}
+                type="button"
+                onClick={onShowTooltip}
+              >
+                <i className={`fas fa-ellipsis-h ${classes.options}`}></i>
+              </button>
+            )}
+
             {showTooltip && (
               <Tooltip onShowTooltip={onShowTooltip}>
                 <button type="button" className={classes.tooltipDelete}>

@@ -30,7 +30,7 @@ const PostDetailComments = (props) => {
 
   const renderComments = () => {
     return props.comments
-      .map((comment) => <Comment comment={comment} key={comment._id} />)
+      .map((comment) => <Comment comment={comment} key={comment._id} user={props.user} />)
       .reverse();
   };
 
