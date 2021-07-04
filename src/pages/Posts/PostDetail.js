@@ -10,14 +10,21 @@ const PostDetail = (props) => {
   const [loading, setLoading] = useState(true);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
   const [post, setPost] = useState({});
+  const [newComment, setNewComment] = useState({});
+
+  const onAddComment = (comment) => {
+    console.log('new comment: ', comment);
+    setNewComment(comment);
+  }
 
   useEffect(() => {
     const postId = props.match.params.id;
     PostModel.getOne(postId).then((data) => {
       setPost(data.data.post);
       setLoading(false);
+      
     });
-  }, [props.match.params.id]);
+  }, [props.match.params.id, newComment]);
 
   const deletePost = (id) => {
     PostModel.delete(id).then((res) => {
@@ -62,7 +69,7 @@ const PostDetail = (props) => {
     return (
       <div className="postDetailContainer">
       <PostDetailHeader post={post} onRenderBtns={renderBtns} className="postHeader" />
-      <PostDetailComments comments={post.comments} post={post} user={props.user} />
+      <PostDetailComments comments={post.comments} post={post} user={props.user} onAddComment={onAddComment} />
       </div>
     );
   } else {
