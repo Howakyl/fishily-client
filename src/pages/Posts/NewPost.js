@@ -32,7 +32,7 @@ const NewPost = (props) => {
         setTitleIsValid(false);
       }
 
-      if (description.length > 0 && description.length <= 300) {
+      if (description.length <= 300) {
         setDescriptionIsValid(true);
       } else {
         setDescriptionIsValid(false);
