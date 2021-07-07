@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostModel from "../../models/post";
 import { Redirect } from "react-router-dom";
 import NewPostMap from "../../components/NewPostMap";
 import Input from "../../components/UI/Input";
 
 const NewPost = (props) => {
+  const [formIsValid, setFormIsValid] = useState(false)
+  const [titleIsValid, setTitleIsValid] = useState(false);
+  const [descriptionIsValid, setDescriptionIsValid] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [fish, setFish] = useState("");
@@ -20,6 +23,30 @@ const NewPost = (props) => {
     setLng(coordinates.longitude);
     setLat(coordinates.latitude);
   };
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      if (title.length > 0 && title.length <= 100) {
+        setTitleIsValid(true);
+      } else {
+        setTitleIsValid(false);
+      }
+
+      if (description.length > 0 && description.length <= 300) {
+        setDescriptionIsValid(true);
+      } else {
+        setDescriptionIsValid(false);
+      }
+      
+      console.log('checking form validity');
+      setFormIsValid(titleIsValid)
+    }, 400);
+
+    return () => {
+      console.log('cleanup')
+      clearTimeout(identifier)
+    };
+  },[title, titleIsValid, description])
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -56,6 +83,7 @@ const NewPost = (props) => {
             required: true,
           }}
           requiredText="required"
+          onIsValid={titleIsValid}
         />
 
         <Input
@@ -69,6 +97,7 @@ const NewPost = (props) => {
             value: description,
           }}
           requiredText="include a short description about your catch!"
+          onIsValid={descriptionIsValid}
         />
 
         <Input
