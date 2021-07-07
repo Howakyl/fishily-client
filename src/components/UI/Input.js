@@ -3,7 +3,7 @@ import classes from "./Input.module.css";
 
 const Input = (props) => {
   return (
-    <div className={` form-group ${classes.input}`}>
+    <div className={`form-group ${classes.input} ${props.className}`}>
       <label htmlFor={props.input.id} className={classes.label}>
         {props.label}
       </label>

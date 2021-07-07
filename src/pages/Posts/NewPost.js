@@ -52,10 +52,10 @@ const NewPost = (props) => {
             id: "titleInput",
             type: "text",
             name: "title",
+            value: title,
             required: true,
           }}
           requiredText="required"
-          value={title}
         />
 
         <Input
@@ -66,9 +66,9 @@ const NewPost = (props) => {
             type: "text",
             name: "description",
             required: true,
+            value: description
           }}
           requiredText="include a short description about your catch!"
-          value={description}
         />
 
         <Input
@@ -77,9 +77,9 @@ const NewPost = (props) => {
           input={{
             id: "fishInput",
             type: "text",
-            name: "fish"
+            name: "fish",
+            value: fish
           }}
-          value={fish}
         />
 
         <h4 className="newPostMapTitle">
@@ -88,31 +88,30 @@ const NewPost = (props) => {
         <NewPostMap onGetCoordinates={onGetCoordinates} />
 
         <section className="row">
-          <div className="form-group col newPost-location">
-            <label htmlFor="locationInput">Where Was Your Catch?</label>
-            <input
-              onChange={(e) => setLocationName(e.target.value)}
-              type="text"
-              className="form-control"
-              id="locationInput"
-              value={locationName}
-              name="locationName"
-            />
-          </div>
-          <div className="form-group col">
-            <label htmlFor="latInput">
-              Latitude<span className="text-muted"> - required</span>
-            </label>
-            <input
-              onChange={(e) => setLat(e.target.value)}
-              type="number"
-              className="form-control"
-              id="latInput"
-              value={lat}
-              name="lat"
-              step=".01"
-            />
-          </div>
+          <Input
+            className="col"
+            onChange={(e) => setLocationName(e.target.value)}
+            label="Where Was Your Catch?"
+            input={{
+              id: "locationInput",
+              type: "text",
+              name: "locationName",
+              value: locationName
+            }}
+          />
+
+          <Input
+            onChange={(e) => setLat(e.target.value)}
+            className="col"
+            label="Latitude"
+            input={{
+              id: "latInput",
+              name: "lat",
+              value: lat,
+              type: "number",
+              step: ".01"
+            }}
+          />
           <div className="form-group col">
             <label htmlFor="lngInput">
               Longitude<span className="text-muted"> - required</span>
