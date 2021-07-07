@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PostModel from "../../models/post";
 import { Redirect } from "react-router-dom";
 import NewPostMap from "../../components/NewPostMap";
+import Input from "../../components/UI/Input";
 
 const NewPost = (props) => {
   const [title, setTitle] = useState("");
@@ -14,11 +15,11 @@ const NewPost = (props) => {
     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Fish_icon.svg/1200px-Fish_icon.svg.png"
   );
   const [redirectToPosts, setRedirectToPosts] = useState(false);
-  
+
   const onGetCoordinates = (coordinates) => {
-    setLng(coordinates.longitude)
-    setLat(coordinates.latitude)
-  }
+    setLng(coordinates.longitude);
+    setLat(coordinates.latitude);
+  };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -44,18 +45,19 @@ const NewPost = (props) => {
     <div>
       <form className="container" onSubmit={handleFormSubmit}>
         <h1 className="newPost-title">submit a new post!</h1>
-        <div className="form-group">
-          <label htmlFor="titleInput">Title</label>
-          <small className="form-text text-muted">required</small>
-          <input
-            onChange={(e) => setTitle(e.target.value)}
-            type="text"
-            className="form-control"
-            id="titleInput"
-            value={title}
-            name="title"
-          />
-        </div>
+
+        <Input
+          onChange={(e) => setTitle(e.target.value)}
+          label="Title"
+          input={{
+            id: "titleInput",
+            type: "text",
+            name: "title",
+            required: true,
+          }}
+          value={title}
+        />
+
         <div className="form-group">
           <label htmlFor="descInput">Description</label>
           <small className="form-text text-muted">

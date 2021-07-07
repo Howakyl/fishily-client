@@ -108,7 +108,11 @@ const PostDetailComments = (props) => {
               >
                 Cancel
               </button>
-              <button className={`btn btn-primary`} type="submit" disabled={!commentIsValid}>
+              <button
+                className={`btn btn-primary`}
+                type="submit"
+                disabled={!commentIsValid}
+              >
                 Send
               </button>
             </div>

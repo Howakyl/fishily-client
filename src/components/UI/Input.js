@@ -7,17 +7,24 @@ const Input = (props) => {
       <label htmlFor={props.input.id} className={classes.label}>
         {props.label}
       </label>
+      {props.input.required === true && (
+        <small className="form-text text-muted">required</small>
+      )}
       {props.input.textarea === "true" ? (
         <textarea
           {...props.input}
-          className={`${props.className} form-control ${!props.onIsValid ? classes.invalid : ''}`}
+          className={`${props.className} form-control ${
+            !props.onIsValid ? classes.invalid : ""
+          }`}
           onChange={props.onChange}
           placeholder={props.placeholder}
         />
       ) : (
         <input
           {...props.input}
-          className={`${props.className} form-control ${!props.onIsValid ? classes.invalid : ''}`}
+          className={`${props.className} form-control ${
+            !props.onIsValid ? classes.invalid : ""
+          }`}
           onChange={props.onChange}
           placeholder={props.placeholder}
         />
