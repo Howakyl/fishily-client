@@ -97,6 +97,7 @@ const PostDetailComments = (props) => {
               placeholder="Add a comment..."
               onChange={(e) => setDescription(e.target.value)}
               value={description}
+              onIsValid={commentIsValid}
             />
             <small>{description.length}/300</small>
             <div className={classes.buttonContainer}>
@@ -107,7 +108,7 @@ const PostDetailComments = (props) => {
               >
                 Cancel
               </button>
-              <button className={`btn btn-primary`} type="submit">
+              <button className={`btn btn-primary`} type="submit" disabled={!commentIsValid}>
                 Send
               </button>
             </div>

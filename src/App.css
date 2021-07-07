@@ -83,6 +83,11 @@ h4 a {
   border: #1e402e solid 1px;
 }
 
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: rgb(112, 111, 111);
+  border: rgb(112, 111, 111) solid 1px;
+}
+
 .btn:hover {
   background-color: #306649;
   border: #1e402e solid 1px;

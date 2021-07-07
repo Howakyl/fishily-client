@@ -1,0 +1,4 @@
+.invalid:focus {
+    box-shadow: 0 0 3px rgb(224, 57, 57) !important;
+    border: rgb(224, 57, 57, .7) 2px solid !important;
+}
