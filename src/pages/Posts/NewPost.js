@@ -66,7 +66,7 @@ const NewPost = (props) => {
             type: "text",
             name: "description",
             required: true,
-            value: description
+            value: description,
           }}
           requiredText="include a short description about your catch!"
         />
@@ -78,7 +78,7 @@ const NewPost = (props) => {
             id: "fishInput",
             type: "text",
             name: "fish",
-            value: fish
+            value: fish,
           }}
         />
 
@@ -96,7 +96,7 @@ const NewPost = (props) => {
               id: "locationInput",
               type: "text",
               name: "locationName",
-              value: locationName
+              value: locationName,
             }}
           />
 
@@ -109,23 +109,22 @@ const NewPost = (props) => {
               name: "lat",
               value: lat,
               type: "number",
-              step: ".01"
+              step: ".01",
             }}
           />
-          <div className="form-group col">
-            <label htmlFor="lngInput">
-              Longitude<span className="text-muted"> - required</span>
-            </label>
-            <input
-              onChange={(e) => setLng(e.target.value)}
-              type="number"
-              className="form-control"
-              id="lngInput"
-              value={lng}
-              name="lng"
-              step=".01"
-            />
-          </div>
+
+          <Input
+            onChange={(e) => setLng(e.target.value)}
+            className="col"
+            label="Longitude"
+            input={{
+              id: "lngInput",
+              type: "number",
+              name: "lng",
+              value: lng,
+              step: ".01",
+            }}
+          />
         </section>
 
         <div className="form-group">
