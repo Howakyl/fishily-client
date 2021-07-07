@@ -63,7 +63,7 @@ const NewPost = (props) => {
           label="Description"
           input={{
             id: "descInput",
-            type:"text",
+            type: "text",
             name: "description",
             required: true,
           }}
@@ -71,17 +71,16 @@ const NewPost = (props) => {
           value={description}
         />
 
-        <div className="form-group">
-          <label htmlFor="fishInput">Fish Caught:</label>
-          <input
-            onChange={(e) => setFish(e.target.value)}
-            type="text"
-            className="form-control"
-            id="fishInput"
-            value={fish}
-            name="fish"
-          />
-        </div>
+        <Input
+          onChange={(e) => setFish(e.target.value)}
+          label="Fish Caught:"
+          input={{
+            id: "fishInput",
+            type: "text",
+            name: "fish"
+          }}
+          value={fish}
+        />
 
         <h4 className="newPostMapTitle">
           Drag the pin to get your coordinates!
