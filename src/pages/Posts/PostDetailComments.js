@@ -93,10 +93,10 @@ const PostDetailComments = (props) => {
                 id: "descriptionInput",
                 type: "text",
                 textarea: "true",
+                placeholder: "Add a comment....",
+                value: description
               }}
-              placeholder="Add a comment..."
               onChange={(e) => setDescription(e.target.value)}
-              value={description}
               onIsValid={commentIsValid}
             />
             <small>{description.length}/300</small>

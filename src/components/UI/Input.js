@@ -17,7 +17,6 @@ const Input = (props) => {
             !props.onIsValid ? classes.invalid : ""
           }`}
           onChange={props.onChange}
-          placeholder={props.placeholder}
         />
       ) : (
         <input
@@ -26,7 +25,6 @@ const Input = (props) => {
             !props.onIsValid ? classes.invalid : ""
           }`}
           onChange={props.onChange}
-          placeholder={props.placeholder}
         />
       )}
     </div>
