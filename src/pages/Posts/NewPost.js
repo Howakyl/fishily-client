@@ -127,17 +127,16 @@ const NewPost = (props) => {
           />
         </section>
 
-        <div className="form-group">
-          <label htmlFor="imageInput">Submit a picture!</label>
-          <input
-            onChange={(e) => setImage(e.target.value)}
-            type="text"
-            className="form-control"
-            id="imageInput"
-            value={image}
-            name="image"
-          />
-        </div>
+        <Input
+          onChange={(e) => setImage(e.target.value)}
+          label="Submit a picture!"
+          input={{
+            id: "imageInput",
+            value: image,
+            name: "image",
+            type: "text",
+          }}
+        />
 
         <button type="submit" className="btn btn-primary newPostBtn">
           Submit Post
