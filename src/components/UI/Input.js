@@ -17,7 +17,7 @@ const Input = (props) => {
       ) : (
         <input
           {...props.input}
-          className={`${props.className} form-control`}
+          className={`${props.className} form-control ${!props.onIsValid ? classes.invalid : ''}`}
           onChange={props.onChange}
           placeholder={props.placeholder}
         />
