@@ -45,7 +45,6 @@ const NewPost = (props) => {
     <div>
       <form className="container" onSubmit={handleFormSubmit}>
         <h1 className="newPost-title">submit a new post!</h1>
-
         <Input
           onChange={(e) => setTitle(e.target.value)}
           label="Title"
@@ -55,23 +54,23 @@ const NewPost = (props) => {
             name: "title",
             required: true,
           }}
+          requiredText="required"
           value={title}
         />
 
-        <div className="form-group">
-          <label htmlFor="descInput">Description</label>
-          <small className="form-text text-muted">
-            include a short description about your catch!
-          </small>
-          <input
-            onChange={(e) => setDescription(e.target.value)}
-            type="text"
-            className="form-control"
-            id="descInput"
-            value={description}
-            name="description"
-          />
-        </div>
+        <Input
+          onChange={(e) => setDescription(e.target.value)}
+          label="Description"
+          input={{
+            id: "descInput",
+            type:"text",
+            name: "description",
+            required: true,
+          }}
+          requiredText="include a short description about your catch!"
+          value={description}
+        />
+
         <div className="form-group">
           <label htmlFor="fishInput">Fish Caught:</label>
           <input

@@ -8,7 +8,7 @@ const Input = (props) => {
         {props.label}
       </label>
       {props.input.required === true && (
-        <small className="form-text text-muted">required</small>
+        <small className="form-text text-muted">{props.requiredText}</small>
       )}
       {props.input.textarea === "true" ? (
         <textarea
