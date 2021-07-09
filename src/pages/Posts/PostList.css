@@ -44,6 +44,12 @@
     max-height: 60vh;
 }
 
+@media only screen  and (max-width: 1220px) {
+    .postCardWidth {
+        max-width: 420px;
+    }
+}
+
 @media only screen and (min-width: 1077px) {
     .postList-wrapper {
         display: flex;
@@ -72,6 +78,10 @@
         width: 100vw !important;
         border-top: 1px solid #234a35;
     }
+
+    .postCardWidth {
+        max-width: 500px;
+    }
 }
 
 @media only screen and (max-width: 770px) {
@@ -96,3 +106,5 @@
         max-width: 90% !important;
     }
 }
+
+/* 1077 - 1220 */
