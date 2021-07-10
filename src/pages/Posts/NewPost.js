@@ -169,6 +169,7 @@ const NewPost = (props) => {
             name: "image",
             type: "text",
           }}
+          onIsValid={true}
         />
 
         <button type="submit" className="btn btn-primary newPostBtn">
