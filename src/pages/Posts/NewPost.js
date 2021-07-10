@@ -38,31 +38,32 @@ const NewPost = (props) => {
         setDescriptionIsValid(false);
       }
       
-      console.log('checking form validity');
-      setFormIsValid(titleIsValid)
+      setFormIsValid(titleIsValid && descriptionIsValid)
     }, 200);
 
     return () => {
-      console.log('cleanup')
       clearTimeout(identifier)
     };
   },[title, titleIsValid, description])
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const formData = {
-      title: title,
-      description: description,
-      fish: fish,
-      locationName: locationName,
-      lat: lat,
-      lng: lng,
-      image: image,
-    };
 
-    PostModel.create(formData, props.user._id).then((res) => {
-      setRedirectToPosts(true);
-    });
+    if (formIsValid) {
+      const formData = {
+        title: title,
+        description: description,
+        fish: fish,
+        locationName: locationName,
+        lat: lat,
+        lng: lng,
+        image: image,
+      };
+  
+      PostModel.create(formData, props.user._id).then((res) => {
+        setRedirectToPosts(true);
+      });
+    }
   };
 
   if (redirectToPosts) {

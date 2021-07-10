@@ -25,6 +25,7 @@ const Input = (props) => {
             !props.onIsValid ? classes.invalid : ""
           }`}
           onChange={props.onChange}
+          onBlur={props.onBlur}
         />
       )}
     </div>
