@@ -17,7 +17,7 @@ const PostDetailComments = (props) => {
       } else {
         setCommentIsValid(false);
       }
-    }, 500);
+    }, 200);
 
     return () => {
       clearTimeout(identifier);

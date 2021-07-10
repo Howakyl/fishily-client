@@ -109,6 +109,7 @@ const NewPost = (props) => {
             name: "fish",
             value: fish,
           }}
+          onIsValid={true}
         />
 
         <h4 className="newPostMapTitle">
@@ -127,6 +128,7 @@ const NewPost = (props) => {
               name: "locationName",
               value: locationName,
             }}
+            onIsValid={true}
           />
 
           <Input
@@ -140,6 +142,7 @@ const NewPost = (props) => {
               type: "number",
               step: ".01",
             }}
+            onIsValid={true}
           />
 
           <Input
@@ -153,6 +156,7 @@ const NewPost = (props) => {
               value: lng,
               step: ".01",
             }}
+            onIsValid={true}
           />
         </section>
 
