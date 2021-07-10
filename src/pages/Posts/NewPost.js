@@ -40,7 +40,7 @@ const NewPost = (props) => {
       
       console.log('checking form validity');
       setFormIsValid(titleIsValid)
-    }, 400);
+    }, 200);
 
     return () => {
       console.log('cleanup')
