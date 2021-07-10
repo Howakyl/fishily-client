@@ -11,6 +11,17 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.commentsContainerInner {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.openCommentBtn {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    order: -1;
+}
+
 .noCommentsContainer {
     display: flex;
     flex-direction: column;
@@ -59,13 +70,7 @@
         margin-bottom: 3rem;
     }
 
-    .commentsContainerInner {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-
     .openCommentBtn {
-        align-self: flex-end;
-        margin-bottom: 10px;
+        order: initial;
     }
 }

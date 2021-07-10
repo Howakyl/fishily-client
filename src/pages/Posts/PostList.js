@@ -19,7 +19,7 @@ const PostList = (props) => {
   function renderPosts() {
     return posts
       .map((post) => {
-        return <PostCard post={post} key={post._id} />;
+        return <PostCard post={post} key={post._id} className="postCardWidth" />;
       })
       .reverse();
   }

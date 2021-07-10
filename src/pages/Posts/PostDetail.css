@@ -14,3 +14,31 @@
 .postHeader {
     align-self: flex-start;
 }
+
+/* DELETE POST MODAL */
+.deletePostTitle {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.postDeleteBtnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 2.5rem;
+}
+
+.cancelPostDeleteBtn {
+    margin-right: 10px;
+
+}
+
+.confirmPostDeleteBtn {
+    background-color: rgb(190, 5, 5);
+    border: rgb(190, 5, 5);
+}
+
+.confirmPostDeleteBtn:hover {
+    background-color: rgb(255, 0, 0);
+    border: red;
+}

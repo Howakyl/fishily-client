@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../../components/UI/Spinner";
+import Modal from "../../components/UI/Modal";
 import PostModel from "../../models/post";
 import CommentModel from "../../models/comment";
 import { Redirect, Link, withRouter } from "react-router-dom";
@@ -9,6 +10,7 @@ import PostDetailComments from "./PostDetailComments";
 
 const PostDetail = (props) => {
   const [loading, setLoading] = useState(true);
+  const [showDeleteModal, setshowDeleteModal] = useState(false);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
   const [post, setPost] = useState({});
   const [newComment, setNewComment] = useState("");
@@ -26,9 +28,7 @@ const PostDetail = (props) => {
   }, [props.match.params.id, newComment]);
 
   const deletePost = (id) => {
-    PostModel.delete(id).then((res) => {
-      setRedirectToPosts(true);
-    });
+    PostModel.delete(id);
   };
 
   const deleteComment = (id) => {
@@ -37,21 +37,15 @@ const PostDetail = (props) => {
     });
   };
 
-  function confirmPostDelete(post) {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete your post?"
-    );
-    if (confirmDelete === true) return deletePost(post);
-  }
+  const onShowDeleteModal = () => {
+    setshowDeleteModal(!showDeleteModal);
+  };
 
   function renderBtns() {
     if (props.user._id === post.user._id) {
       return (
         <>
-          <span
-            className="btn btn-primary"
-            onClick={() => confirmPostDelete(post._id)}
-          >
+          <span className="btn btn-primary" onClick={() => onShowDeleteModal()}>
             Delete Post
           </span>
 
@@ -72,20 +66,51 @@ const PostDetail = (props) => {
 
   if (!loading) {
     return (
-      <div className="postDetailContainer">
-        <PostDetailHeader
-          post={post}
-          onRenderBtns={renderBtns}
-          className="postHeader"
-        />
-        <PostDetailComments
-          comments={post.comments}
-          post={post}
-          user={props.user}
-          onAddComment={onAddComment}
-          onDeleteComment={deleteComment}
-        />
-      </div>
+      <>
+        {showDeleteModal && (
+          <Modal onShowModal={onShowDeleteModal}>
+            <h4 className="deletePostTitle">
+              Are you sure you want to delete your post?
+            </h4>
+            <div className="postDeleteBtnContainer">
+              <button
+                className="btn btn-primary cancelPostDeleteBtn"
+                type="button"
+                onClick={() => {
+                  setshowDeleteModal();
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn btn-primary confirmPostDeleteBtn"
+                type="button"
+                onClick={() => {
+                  deletePost(post._id);
+                  setshowDeleteModal();
+                  setRedirectToPosts(true);
+                }}
+              >
+                Confirm
+              </button>
+            </div>
+          </Modal>
+        )}
+        <div className="postDetailContainer">
+          <PostDetailHeader
+            post={post}
+            onRenderBtns={renderBtns}
+            className="postHeader"
+          />
+          <PostDetailComments
+            comments={post.comments}
+            post={post}
+            user={props.user}
+            onAddComment={onAddComment}
+            onDeleteComment={deleteComment}
+          />
+        </div>
+      </>
     );
   } else {
     return <Spinner />;

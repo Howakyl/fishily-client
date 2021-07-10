@@ -8,7 +8,7 @@ const PostCard = (props) => {
   const year = postDate.getFullYear();
 
   return (
-    <div className="card mb-3 postList-card" style={{ maxWidth: "440px" }}>
+    <div className={`card mb-3 postList-card ${props.className}`}>
       <div className="row no-gutters">
         <div className="col-md-4">
           <img src={props.post.image} className="card-img" alt="fish" />
