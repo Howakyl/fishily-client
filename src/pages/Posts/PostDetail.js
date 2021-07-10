@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../../components/UI/Spinner";
+import Modal from '../../components/UI/Modal';
 import PostModel from "../../models/post";
 import CommentModel from "../../models/comment";
 import { Redirect, Link, withRouter } from "react-router-dom";
@@ -9,6 +10,7 @@ import PostDetailComments from "./PostDetailComments";
 
 const PostDetail = (props) => {
   const [loading, setLoading] = useState(true);
+  const [showDeleteModal, setshowDeleteModal] = useState(false);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
   const [post, setPost] = useState({});
   const [newComment, setNewComment] = useState("");
@@ -44,6 +46,10 @@ const PostDetail = (props) => {
     if (confirmDelete === true) return deletePost(post);
   }
 
+  const onShowDeleteModal = () => {
+    setshowDeleteModal(!showDeleteModal);
+  }
+
   function renderBtns() {
     if (props.user._id === post.user._id) {
       return (
@@ -72,6 +78,8 @@ const PostDetail = (props) => {
 
   if (!loading) {
     return (
+      <>
+      {showDeleteModal && <Modal>modal</Modal>}
       <div className="postDetailContainer">
         <PostDetailHeader
           post={post}
@@ -86,6 +94,7 @@ const PostDetail = (props) => {
           onDeleteComment={deleteComment}
         />
       </div>
+      </>
     );
   } else {
     return <Spinner />;
