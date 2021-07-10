@@ -44,7 +44,7 @@ const NewPost = (props) => {
     return () => {
       clearTimeout(identifier);
     };
-  }, [title, titleIsValid, description]);
+  }, [title, titleIsValid, description, descriptionIsValid]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
