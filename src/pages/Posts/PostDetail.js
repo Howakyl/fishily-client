@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "../../components/UI/Spinner";
-import Modal from '../../components/UI/Modal';
+import Modal from "../../components/UI/Modal";
 import PostModel from "../../models/post";
 import CommentModel from "../../models/comment";
 import { Redirect, Link, withRouter } from "react-router-dom";
@@ -48,7 +48,7 @@ const PostDetail = (props) => {
 
   const onShowDeleteModal = () => {
     setshowDeleteModal(!showDeleteModal);
-  }
+  };
 
   function renderBtns() {
     if (props.user._id === post.user._id) {
@@ -56,7 +56,8 @@ const PostDetail = (props) => {
         <>
           <span
             className="btn btn-primary"
-            onClick={() => confirmPostDelete(post._id)}
+            onClick={() => onShowDeleteModal()}
+            // confirmPostDelete(post._id)
           >
             Delete Post
           </span>
@@ -79,21 +80,43 @@ const PostDetail = (props) => {
   if (!loading) {
     return (
       <>
-      {showDeleteModal && <Modal>modal</Modal>}
-      <div className="postDetailContainer">
-        <PostDetailHeader
-          post={post}
-          onRenderBtns={renderBtns}
-          className="postHeader"
-        />
-        <PostDetailComments
-          comments={post.comments}
-          post={post}
-          user={props.user}
-          onAddComment={onAddComment}
-          onDeleteComment={deleteComment}
-        />
-      </div>
+        {showDeleteModal && (
+          <Modal onShowModal={onShowDeleteModal}>
+            <h4>Are you sure you want to delete your post?</h4>
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  setshowDeleteModal();
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  deletePost(post._id);
+                }}
+              >
+                Confirm
+              </button>
+            </div>
+          </Modal>
+        )}
+        <div className="postDetailContainer">
+          <PostDetailHeader
+            post={post}
+            onRenderBtns={renderBtns}
+            className="postHeader"
+          />
+          <PostDetailComments
+            comments={post.comments}
+            post={post}
+            user={props.user}
+            onAddComment={onAddComment}
+            onDeleteComment={deleteComment}
+          />
+        </div>
       </>
     );
   } else {
