@@ -28,9 +28,7 @@ const PostDetail = (props) => {
   }, [props.match.params.id, newComment]);
 
   const deletePost = (id) => {
-    PostModel.delete(id).then((res) => {
-      setRedirectToPosts(true);
-    });
+    PostModel.delete(id);
   };
 
   const deleteComment = (id) => {
@@ -38,13 +36,6 @@ const PostDetail = (props) => {
       setNewComment(id);
     });
   };
-
-  function confirmPostDelete(post) {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete your post?"
-    );
-    if (confirmDelete === true) return deletePost(post);
-  }
 
   const onShowDeleteModal = () => {
     setshowDeleteModal(!showDeleteModal);
@@ -54,11 +45,7 @@ const PostDetail = (props) => {
     if (props.user._id === post.user._id) {
       return (
         <>
-          <span
-            className="btn btn-primary"
-            onClick={() => onShowDeleteModal()}
-            // confirmPostDelete(post._id)
-          >
+          <span className="btn btn-primary" onClick={() => onShowDeleteModal()}>
             Delete Post
           </span>
 
@@ -82,9 +69,12 @@ const PostDetail = (props) => {
       <>
         {showDeleteModal && (
           <Modal onShowModal={onShowDeleteModal}>
-            <h4>Are you sure you want to delete your post?</h4>
-            <div>
+            <h4 className="deletePostTitle">
+              Are you sure you want to delete your post?
+            </h4>
+            <div className="postDeleteBtnContainer">
               <button
+                className="btn btn-primary cancelPostDeleteBtn"
                 type="button"
                 onClick={() => {
                   setshowDeleteModal();
@@ -93,9 +83,12 @@ const PostDetail = (props) => {
                 Cancel
               </button>
               <button
+                className="btn btn-primary confirmPostDeleteBtn"
                 type="button"
                 onClick={() => {
                   deletePost(post._id);
+                  setshowDeleteModal();
+                  setRedirectToPosts(true);
                 }}
               >
                 Confirm
