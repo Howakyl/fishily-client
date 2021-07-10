@@ -9,6 +9,10 @@
     overflow: scroll;
 }
 
+.postCardWidth {
+    max-width: 460px;
+}
+
 .postList-container img {
     height: 100%;
 }
