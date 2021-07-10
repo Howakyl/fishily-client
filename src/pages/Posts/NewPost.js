@@ -5,7 +5,7 @@ import NewPostMap from "../../components/NewPostMap";
 import Input from "../../components/UI/Input";
 
 const NewPost = (props) => {
-  const [formIsValid, setFormIsValid] = useState(false)
+  const [formIsValid, setFormIsValid] = useState(false);
   const [titleIsValid, setTitleIsValid] = useState(false);
   const [descriptionIsValid, setDescriptionIsValid] = useState(false);
   const [title, setTitle] = useState("");
@@ -37,14 +37,14 @@ const NewPost = (props) => {
       } else {
         setDescriptionIsValid(false);
       }
-      
-      setFormIsValid(titleIsValid && descriptionIsValid)
+
+      setFormIsValid(titleIsValid && descriptionIsValid);
     }, 200);
 
     return () => {
-      clearTimeout(identifier)
+      clearTimeout(identifier);
     };
-  },[title, titleIsValid, description])
+  }, [title, titleIsValid, description]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -59,7 +59,7 @@ const NewPost = (props) => {
         lng: lng,
         image: image,
       };
-  
+
       PostModel.create(formData, props.user._id).then((res) => {
         setRedirectToPosts(true);
       });
