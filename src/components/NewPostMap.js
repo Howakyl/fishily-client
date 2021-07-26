@@ -35,7 +35,7 @@ const NewPostMap = (props) => {
     <div className="newPostMapContainer">
       <ReactMapGl
         {...viewport}
-        mapboxApiAccessToken="pk.eyJ1IjoiaG93YWt5bCIsImEiOiJja2kyNnBicjgwc2p1MnltczJsdnl3d21mIn0.SLI_INsIZTohrQ3H-tc9cA"
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/howakyl/ckjf4skamegso19lhg8mm027h"
         onViewportChange={(viewport) => {
           setViewport(viewport);
