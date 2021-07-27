@@ -7,7 +7,7 @@ const LogIn = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameIsValid, setUsernameIsValid] = useState(false);
-  const [passwordIsValid, setpasswordIsValid] = useState(false);
+  const [passwordIsValid, setPasswordIsValid] = useState(false);
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -17,13 +17,19 @@ const LogIn = (props) => {
       } else {
         setUsernameIsValid(false);
       }
-    }, 200);
+
+      if (password.length >= 4) {
+        setPasswordIsValid(true);
+      } else {
+        setPasswordIsValid(false);
+      }
+    }, 300);
 
     return () => {
       clearTimeout(identifier);
       console.log('clear')
     };
-  }, [username]);
+  }, [username, password]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -50,45 +56,29 @@ const LogIn = (props) => {
       <div>
         <form className="container" onSubmit={handleFormSubmit}>
           <h1 className="logInTitle">Log In!</h1>
-          {/* <div className="form-group">
-            <label htmlFor="usernameInput">username</label>
-            <input
-              onChange={(e) => setUsername(e.target.value)}
-              type="text"
-              className="form-control"
-              id="usernameInput"
-              value={username}
-              name="username"
-              pattern=".{4,}"
-              title="Must be at least 4 characters long."
-            />
-          </div> */}
           <Input 
             label="Username"
             input={{
               id: "usernameInput",
               type: "text",
-              placeholder: "Enter your username!",
+              placeholder: "Enter your username...",
               value: username,
             }}
             onChange={(e) => setUsername(e.target.value)}
             onIsValid={usernameIsValid}
           />
           <br />
-          <div className="form-group">
-            <label htmlFor="passInput">Password</label>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              className="form-control"
-              id="passInput"
-              value={password}
-              name="password"
-              pattern=".{4,}"
-              title="Must be at least 4 characters long."
-            />
-          </div>
-
+          <Input
+            label="Password"
+            input={{
+              id: "passInput",
+              type: "password",
+              placeholder: "Enter your password...",
+              value: password
+            }}
+            onChange={(e) => setPassword(e.target.value)}
+            onIsValid={passwordIsValid}
+          />
           <button type="submit" className="btn btn-primary">
             Log In
           </button>
