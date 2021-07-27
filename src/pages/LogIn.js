@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from '../components/UI/Input';
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
@@ -6,8 +6,24 @@ import { Redirect } from "react-router-dom";
 const LogIn = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameIsValid, setUserameIsValid] = useState(false);
+  const [usernameIsValid, setUsernameIsValid] = useState(false);
   const [passwordIsValid, setpasswordIsValid] = useState(false);
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log('checking validity')
+      if (username.length >= 4) {
+        setUsernameIsValid(true);
+      } else {
+        setUsernameIsValid(false);
+      }
+    }, 200);
+
+    return () => {
+      clearTimeout(identifier);
+      console.log('clear')
+    };
+  }, [username]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
