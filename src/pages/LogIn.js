@@ -11,8 +11,6 @@ const LogIn = (props) => {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      console.log('checking validity')
-
       if (!usernameIsValid) {
         document.getElementById("usernameInput").focus();
         setUsernameIsValid(false);
@@ -26,7 +24,6 @@ const LogIn = (props) => {
 
     return () => {
       clearTimeout(identifier);
-      console.log('clear')
     };
   }, [username, password, usernameIsValid, passwordIsValid]);
 
@@ -39,11 +36,9 @@ const LogIn = (props) => {
       };
       UserModel.login(formData).then((res) => {
         if (res.data.error === 'incorrect password.') {
-          console.log('password error')
           setPasswordIsValid(false);
         }
         if (res.data.error === 'no user found.') {
-          console.log('username error');
           setUsernameIsValid(false);
         }
         props.setUser(res.data);
@@ -59,6 +54,7 @@ const LogIn = (props) => {
       <div>
         <form className="container" onSubmit={handleFormSubmit}>
           <h1 className="logInTitle">Log In!</h1>
+          {usernameIsValid ? <small></small> : <small>Username does not exist.</small>}
           <Input 
             label="Username"
             input={{
