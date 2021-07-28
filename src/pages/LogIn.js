@@ -1,22 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Input from '../components/UI/Input';
+import ErrorText from "../components/UI/ErrorText";
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
 
 const LogIn = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameIsValid, setUsernameIsValid] = useState(true);
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      if (!usernameIsValid) {
+        document.getElementById("usernameInput").focus();
+        setUsernameIsValid(false);
+      }
+
+      if (!passwordIsValid) {
+        document.getElementById("passInput").focus();
+        setPasswordIsValid(false);
+      }
+    }, 300);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [username, password, usernameIsValid, passwordIsValid]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const formData = {
-      username: username,
-      password: password,
-    };
-
-    UserModel.login(formData).then((res) => {
-      props.setUser(res.data);
-      localStorage.setItem("user", JSON.stringify(res.data));
-    });
+    if (usernameIsValid && passwordIsValid) {
+      const formData = {
+        username: username,
+        password: password,
+      };
+      UserModel.login(formData).then((res) => {
+        if (res.data.error === 'incorrect password.') {
+          setPasswordIsValid(false);
+        }
+        if (res.data.error === 'no user found.') {
+          setUsernameIsValid(false);
+        }
+        props.setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
+      });
+    }
   };
 
   if (props.user.username) {
@@ -26,34 +55,37 @@ const LogIn = (props) => {
       <div>
         <form className="container" onSubmit={handleFormSubmit}>
           <h1 className="logInTitle">Log In!</h1>
-          <div className="form-group">
-            <label htmlFor="usernameInput">username</label>
-            <input
-              onChange={(e) => setUsername(e.target.value)}
-              type="text"
-              className="form-control"
-              id="usernameInput"
-              value={username}
-              name="username"
-              pattern=".{4,}"
-              title="Must be at least 4 characters long."
-            />
-          </div>
+          {usernameIsValid ? <ErrorText /> : <ErrorText>Username is does not exist.</ErrorText>}
+          <Input 
+            label="Username"
+            input={{
+              id: "usernameInput",
+              type: "text",
+              placeholder: "Enter your username...",
+              value: username,
+            }}
+            onChange={(e) => {
+              setUsername(e.target.value)
+              setUsernameIsValid(true)
+              }}
+            onIsValid={usernameIsValid}
+          />
           <br />
-          <div className="form-group">
-            <label htmlFor="passInput">Password</label>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              className="form-control"
-              id="passInput"
-              value={password}
-              name="password"
-              pattern=".{4,}"
-              title="Must be at least 4 characters long."
-            />
-          </div>
-
+          {passwordIsValid ? <ErrorText /> : <ErrorText>incorrect password.</ErrorText>}
+          <Input
+            label="Password"
+            input={{
+              id: "passInput",
+              type: "password",
+              placeholder: "Enter your password...",
+              value: password
+            }}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setPasswordIsValid(true)
+              }}
+            onIsValid={passwordIsValid}
+          />
           <button type="submit" className="btn btn-primary">
             Log In
           </button>
