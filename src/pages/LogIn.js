@@ -6,21 +6,20 @@ import { Redirect } from "react-router-dom";
 const LogIn = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameIsValid, setUsernameIsValid] = useState(false);
-  const [passwordIsValid, setPasswordIsValid] = useState(false);
+  const [usernameIsValid, setUsernameIsValid] = useState(true);
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
 
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log('checking validity')
-      if (username.length >= 4) {
-        setUsernameIsValid(true);
-      } else {
+
+      if (!usernameIsValid) {
+        document.getElementById("usernameInput").focus();
         setUsernameIsValid(false);
       }
 
-      if (password.length >= 4) {
-        setPasswordIsValid(true);
-      } else {
+      if (!passwordIsValid) {
+        document.getElementById("passInput").focus();
         setPasswordIsValid(false);
       }
     }, 300);
@@ -29,24 +28,28 @@ const LogIn = (props) => {
       clearTimeout(identifier);
       console.log('clear')
     };
-  }, [username, password]);
+  }, [username, password, usernameIsValid, passwordIsValid]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const formData = {
-      username: username,
-      password: password,
-    };
-    UserModel.login(formData).then((res) => {
-      if (res.data.error === 'incorrect password.') {
-        console.log('password error')
-      }
-      if (res.data.error === 'no user found.') {
-        console.log('username error')
-      }
-      props.setUser(res.data);
-      localStorage.setItem("user", JSON.stringify(res.data));
-    });
+    if (usernameIsValid && passwordIsValid) {
+      const formData = {
+        username: username,
+        password: password,
+      };
+      UserModel.login(formData).then((res) => {
+        if (res.data.error === 'incorrect password.') {
+          console.log('password error')
+          setPasswordIsValid(false);
+        }
+        if (res.data.error === 'no user found.') {
+          console.log('username error');
+          setUsernameIsValid(false);
+        }
+        props.setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
+      });
+    }
   };
 
   if (props.user.username) {
@@ -64,7 +67,10 @@ const LogIn = (props) => {
               placeholder: "Enter your username...",
               value: username,
             }}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value)
+              setUsernameIsValid(true)
+              }}
             onIsValid={usernameIsValid}
           />
           <br />
@@ -76,7 +82,10 @@ const LogIn = (props) => {
               placeholder: "Enter your password...",
               value: password
             }}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setPasswordIsValid(true)
+              }}
             onIsValid={passwordIsValid}
           />
           <button type="submit" className="btn btn-primary">
