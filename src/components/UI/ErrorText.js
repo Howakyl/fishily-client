@@ -1,11 +1,11 @@
-import classes from './ErrorText.module.css';
+import classes from "./ErrorText.module.css";
 
 const ErrorText = (props) => {
   return (
-    <small className={`${props.className} ${classes.errorText}`}>
-      {props.children}
-    </small>
-  )
-}
+    <div className={`${props.className} ${classes.errorText}`}>
+      <small>{props.children}</small>
+    </div>
+  );
+};
 
-export default ErrorText
+export default ErrorText;

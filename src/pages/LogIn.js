@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Input from '../components/UI/Input';
+import ErrorText from "../components/UI/ErrorText";
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
 
@@ -54,7 +55,7 @@ const LogIn = (props) => {
       <div>
         <form className="container" onSubmit={handleFormSubmit}>
           <h1 className="logInTitle">Log In!</h1>
-          {usernameIsValid ? <small></small> : <small>Username does not exist.</small>}
+          {usernameIsValid ? <ErrorText /> : <ErrorText>Username is does not exist.</ErrorText>}
           <Input 
             label="Username"
             input={{
@@ -70,6 +71,7 @@ const LogIn = (props) => {
             onIsValid={usernameIsValid}
           />
           <br />
+          {passwordIsValid ? <ErrorText /> : <ErrorText>incorrect password.</ErrorText>}
           <Input
             label="Password"
             input={{
