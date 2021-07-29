@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from '../components/UI/Input';
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
@@ -9,20 +9,64 @@ const SignUp = (props) => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
+  const [usernameIsValid, setUsernameIsValid] = useState(false)
+  const [passwordIsValid, setPasswordIsValid] = useState(false)
+  const [bioIsValid, setBioIsValid] = useState(false)
+  const [formIsValid, setFormIsValid] = useState(false)
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log('checking validity')
+      if (username.length > 3) {
+        setUsernameIsValid(true)
+      } else {
+        setUsernameIsValid(false)
+      }
+
+      if (password.length > 3) {
+        setPasswordIsValid(true)
+      } else {
+        setPasswordIsValid(false)
+      }
+
+      if (bio.length < 200) {
+        setBioIsValid(true)
+      } else {
+        setBioIsValid(false)
+      }
+      setFormIsValid(usernameIsValid && passwordIsValid && bioIsValid)
+    }, 200);
+
+    return () => {
+      console.log("cleanup")
+      clearTimeout(identifier);
+    }
+  },[username, password, bio, usernameIsValid, passwordIsValid, bioIsValid])
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const formData = {
-      username: username,
-      firstName: firstName,
-      lastName: lastName,
-      password: password,
-      bio: bio,
-    };
-    UserModel.create(formData).then(() => {
-      setRedirectToLogin(true);
-    });
+    console.log(event)
+    if (formIsValid) {
+      const formData = {
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
+        bio: bio,
+      };
+      UserModel.create(formData).then(() => {
+        setRedirectToLogin(true);
+      });
+    } else {
+      if (!passwordIsValid) {
+        document.getElementById("passInput").focus()
+      } else if (!usernameIsValid) {
+        document.getElementById("usernameInput").focus()
+      } else if (!bioIsValid) {
+        document.getElementById("bioInput").focus()
+      }
+    }
   };
 
   if (redirectToLogin) {
@@ -47,7 +91,7 @@ const SignUp = (props) => {
             }}
             requiredText="Must be at least 4 characters long."
             onChange={(e) => setUsername(e.target.value)}
-            // onIsValid={true}
+            onIsValid={usernameIsValid}
           />
           <Input 
             label="password"
@@ -60,7 +104,7 @@ const SignUp = (props) => {
             }}
             requiredText="Must be at least 4 characters long."
             onChange={(e) => setPassword(e.target.value)}
-            // onIsValid={true}
+            onIsValid={passwordIsValid}
           />
           <Input 
             label="first name"
@@ -71,7 +115,7 @@ const SignUp = (props) => {
               value: firstName
             }}
             onChange={(e) => setFirstName(e.target.value)}
-            // onIsValid={true}
+            onIsValid={true}
           />
           <Input 
             label="last name"
@@ -82,7 +126,7 @@ const SignUp = (props) => {
               value: lastName
             }}
             onChange={(e) => setLastName(e.target.value)}
-            // onIsValid={true}
+            onIsValid={true}
           />
           <Input 
             label="Create a bio:"
@@ -95,7 +139,7 @@ const SignUp = (props) => {
             }}
             requiredText="Must be fewer than 200 characters long."
             onChange={(e) => setBio(e.target.value)}
-            // onIsValid={true}
+            onIsValid={bioIsValid}
           />
           <button type="submit" className="btn btn-primary">
             Create Account
