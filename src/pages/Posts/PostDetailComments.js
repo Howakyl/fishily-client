@@ -48,7 +48,8 @@ const PostDetailComments = (props) => {
       CommentModel.create(description, props.post._id, props.user._id).then(
         (res) => {
           setShowCommentModal(false);
-          props.onAddComment(res);
+          props.onAddComment();
+          setDescription("");
         }
       );
     }
