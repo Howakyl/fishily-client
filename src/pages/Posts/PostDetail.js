@@ -13,10 +13,10 @@ const PostDetail = (props) => {
   const [showDeleteModal, setshowDeleteModal] = useState(false);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
   const [post, setPost] = useState({});
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState(false);
 
-  const onAddComment = (comment) => {
-    setNewComment(comment._id);
+  const onAddComment = () => {
+    setNewComment(!newComment);
   };
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const PostDetail = (props) => {
   };
 
   const deleteComment = (id) => {
-    CommentModel.delete(id).then((res) => {
-      setNewComment(id);
+    CommentModel.delete(id).then(() => {
+      onAddComment();
     });
   };
 
