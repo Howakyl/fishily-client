@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import Zoom from "react-reveal/Zoom";
 import Slide from "react-reveal/Slide";
 
-const Home = (props) => {
+interface User {
+  user: {
+    username: string
+  }
+}
+
+const Home: React.FC<User> = (props) => {
   const getStartedBtn = () => {
     if (props.user.username) {
       return (

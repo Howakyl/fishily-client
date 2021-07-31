@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 react-app-env.d.ts
+react-reveal.d.ts
 
 # testing
 /coverage
