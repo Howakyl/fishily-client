@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Input from '../components/UI/Input';
+import Input from "../components/UI/Input";
 import ErrorText from "../components/UI/ErrorText";
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
 
-const LogIn = (props) => {
+interface Props {
+  user: {
+    username: string;
+  };
+  setUser: (res: Response) => void;
+}
+
+const LogIn: React.FC<Props> = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameIsValid, setUsernameIsValid] = useState(true);
@@ -13,12 +20,12 @@ const LogIn = (props) => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       if (!usernameIsValid) {
-        document.getElementById("usernameInput").focus();
+        document.getElementById("usernameInput")!.focus();
         setUsernameIsValid(false);
       }
 
       if (!passwordIsValid) {
-        document.getElementById("passInput").focus();
+        document.getElementById("passInput")!.focus();
         setPasswordIsValid(false);
       }
     }, 300);
@@ -28,7 +35,7 @@ const LogIn = (props) => {
     };
   }, [username, password, usernameIsValid, passwordIsValid]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (usernameIsValid && passwordIsValid) {
       const formData = {
@@ -36,10 +43,10 @@ const LogIn = (props) => {
         password: password,
       };
       UserModel.login(formData).then((res) => {
-        if (res.data.error === 'incorrect password.') {
+        if (res.data.error === "incorrect password.") {
           setPasswordIsValid(false);
         }
-        if (res.data.error === 'no user found.') {
+        if (res.data.error === "no user found.") {
           setUsernameIsValid(false);
         }
         props.setUser(res.data);
@@ -55,8 +62,12 @@ const LogIn = (props) => {
       <div>
         <form className="container" onSubmit={handleFormSubmit}>
           <h1 className="logInTitle">Log In!</h1>
-          {usernameIsValid ? <ErrorText /> : <ErrorText>Username is does not exist.</ErrorText>}
-          <Input 
+          {usernameIsValid ? (
+            <ErrorText />
+          ) : (
+            <ErrorText>Username is does not exist.</ErrorText>
+          )}
+          <Input
             label="Username"
             input={{
               id: "usernameInput",
@@ -64,26 +75,30 @@ const LogIn = (props) => {
               placeholder: "Enter your username...",
               value: username,
             }}
-            onChange={(e) => {
-              setUsername(e.target.value)
-              setUsernameIsValid(true)
-              }}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setUsername(e.target.value);
+              setUsernameIsValid(true);
+            }}
             onIsValid={usernameIsValid}
           />
           <br />
-          {passwordIsValid ? <ErrorText /> : <ErrorText>incorrect password.</ErrorText>}
+          {passwordIsValid ? (
+            <ErrorText />
+          ) : (
+            <ErrorText>incorrect password.</ErrorText>
+          )}
           <Input
             label="Password"
             input={{
               id: "passInput",
               type: "password",
               placeholder: "Enter your password...",
-              value: password
+              value: password,
             }}
-            onChange={(e) => {
-              setPassword(e.target.value)
-              setPasswordIsValid(true)
-              }}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.target.value);
+              setPasswordIsValid(true);
+            }}
             onIsValid={passwordIsValid}
           />
           <button type="submit" className="btn btn-primary">
