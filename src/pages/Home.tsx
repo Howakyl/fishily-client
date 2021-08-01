@@ -9,9 +9,9 @@ interface User {
   }
 }
 
-const Home: React.FC<User> = (props) => {
+const Home: React.FC<User> = ({user}) => {
   const getStartedBtn = () => {
-    if (props.user.username) {
+    if (user.username) {
       return (
         <>
           <Link to="/posts/new" className="btn btn-primary heroBtn">
