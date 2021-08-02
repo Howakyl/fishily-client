@@ -3,16 +3,30 @@ import Spinner from "../../components/UI/Spinner";
 import Modal from "../../components/UI/Modal";
 import PostModel from "../../models/post";
 import CommentModel from "../../models/comment";
-import { Redirect, Link, withRouter } from "react-router-dom";
+import { Redirect, Link, withRouter, RouteComponentProps } from "react-router-dom";
 import "./PostDetail.css";
 import PostDetailHeader from "./PostDetailHeader";
 import PostDetailComments from "./PostDetailComments";
 
-const PostDetail = (props) => {
+interface Props {
+  user: {
+    _id: string;
+  } 
+}
+
+interface Post {
+  _id: string;
+  user: {
+    _id: string;
+  }
+  comments: [];
+}
+
+const PostDetail: React.FC<Props & RouteComponentProps<any>> = (props) => {
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setshowDeleteModal] = useState(false);
   const [redirectToPosts, setRedirectToPosts] = useState(false);
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<Post>({} as Post);
   const [newComment, setNewComment] = useState(false);
 
   const onAddComment = () => {
@@ -27,11 +41,11 @@ const PostDetail = (props) => {
     });
   }, [props.match.params.id, newComment]);
 
-  const deletePost = (id) => {
+  const deletePost = (id: string) => {
     PostModel.delete(id);
   };
 
-  const deleteComment = (id) => {
+  const deleteComment = (id: string) => {
     CommentModel.delete(id).then(() => {
       onAddComment();
     });
@@ -76,9 +90,7 @@ const PostDetail = (props) => {
               <button
                 className="btn btn-primary cancelPostDeleteBtn"
                 type="button"
-                onClick={() => {
-                  setshowDeleteModal();
-                }}
+                onClick={onShowDeleteModal}
               >
                 Cancel
               </button>
@@ -87,7 +99,7 @@ const PostDetail = (props) => {
                 type="button"
                 onClick={() => {
                   deletePost(post._id);
-                  setshowDeleteModal();
+                  onShowDeleteModal();
                   setRedirectToPosts(true);
                 }}
               >
