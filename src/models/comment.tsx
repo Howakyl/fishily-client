@@ -15,7 +15,7 @@ interface Comment {
 
 class CommentModel {
   // CREATE comment
-  static create = (comment: Comment, postId: string, userId: string) => {
+  static create = (comment: Comment["description"], postId: string, userId: string) => {
     let data = {
       description: comment,
       user: userId,

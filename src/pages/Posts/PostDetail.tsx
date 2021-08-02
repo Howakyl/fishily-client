@@ -31,7 +31,7 @@ interface Post {
     username: string;
     _id: string;
   };
-  comments: [];
+  comments: [{ _id: string }];
 }
 
 const PostDetail: React.FC<Props & RouteComponentProps<any>> = (props) => {
