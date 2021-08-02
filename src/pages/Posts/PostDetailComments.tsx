@@ -21,14 +21,14 @@ interface Props {
   onAddComment: () => void;
 }
 
-interface Comment {
+interface IComment {
   description: string;
   _id: string;
 }
 
 const PostDetailComments: React.FC<Props> = (props) => {
   const [showCommentModal, setShowCommentModal] = useState(false);
-  const [description, setDescription] = useState<Comment["description"]>("");
+  const [description, setDescription] = useState<IComment["description"]>("");
   const [commentIsValid, setCommentIsValid] = useState(false);
 
   useEffect(() => {
