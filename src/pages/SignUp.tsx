@@ -48,7 +48,7 @@ const SignUp: React.FC<Props> = (props) => {
     };
   }, [username, password, bio, usernameIsValid, passwordIsValid, bioIsValid]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(event);
     if (formIsValid) {
@@ -94,7 +94,7 @@ const SignUp: React.FC<Props> = (props) => {
               value: username,
             }}
             requiredText="Must be at least 4 characters long."
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             onIsValid={usernameIsValid}
           />
           <Input
@@ -107,7 +107,7 @@ const SignUp: React.FC<Props> = (props) => {
               value: password,
             }}
             requiredText="Must be at least 4 characters long."
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             onIsValid={passwordIsValid}
           />
           <Input
@@ -118,7 +118,7 @@ const SignUp: React.FC<Props> = (props) => {
               name: "firstName",
               value: firstName,
             }}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
             onIsValid={true}
           />
           <Input
@@ -129,7 +129,7 @@ const SignUp: React.FC<Props> = (props) => {
               name: "lastName",
               value: lastName,
             }}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
             onIsValid={true}
           />
           <Input
@@ -142,7 +142,7 @@ const SignUp: React.FC<Props> = (props) => {
               value: bio,
             }}
             requiredText="Must be fewer than 200 characters long."
-            onChange={(e) => setBio(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBio(e.target.value)}
             onIsValid={bioIsValid}
           />
           <button type="submit" className="btn btn-primary">
