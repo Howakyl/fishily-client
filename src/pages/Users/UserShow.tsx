@@ -30,7 +30,7 @@ interface Post {
 }
 
 const UserShow: React.FC<Props & RouteComponentProps<any>> = (props) => {
-  const [user, setUser] = useState<Partial<User>>({});
+  const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,8 +42,8 @@ const UserShow: React.FC<Props & RouteComponentProps<any>> = (props) => {
   }, [props.match.params.id]);
 
   function renderPosts() {
-    if (user.posts!.length > 0) {
-      return user.posts!
+    if (user.posts.length > 0) {
+      return user.posts
         .map((post, index) => {
           const postDate = new Date(post.date);
           const month = postDate.toLocaleString("en-US", { month: "long" });
@@ -91,7 +91,7 @@ const UserShow: React.FC<Props & RouteComponentProps<any>> = (props) => {
   }
 
   function renderBio() {
-    if (user.bio!.length > 0) {
+    if (user.bio.length > 0) {
       return <p>{user.bio}</p>;
     } else {
       return <p>This user has no bio.</p>;
