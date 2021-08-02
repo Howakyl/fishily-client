@@ -1,7 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PostCard = (props) => {
+interface Props {
+  className: string;
+  post: {
+    date: Date;
+    title: string;
+    image: string;
+    _id: string;
+    description: string;
+    user: {
+      username: string;
+      _id: string;
+      picture: string;
+    }
+  }
+}
+
+const PostCard: React.FC<Props> = (props) => {
   const postDate = new Date(props.post.date);
   const month = postDate.toLocaleString("en-US", { month: "long" });
   const day = postDate.toLocaleString("en-US", { day: "2-digit" });
