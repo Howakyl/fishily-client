@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let endPoint;
+let endPoint: string;
 
 if (process.env.NODE_ENV === "production") {
   endPoint = `https://fishily-api.herokuapp.com/api/fishily/comments`;
@@ -8,9 +8,14 @@ if (process.env.NODE_ENV === "production") {
   endPoint = `http://localhost:4000/api/fishily/comments`;
 }
 
+interface Comment {
+  description: string;
+  _id?: string;
+}
+
 class CommentModel {
   // CREATE comment
-  static create = (comment, postId, userId) => {
+  static create = (comment: Comment, postId: string, userId: string) => {
     let data = {
       description: comment,
       user: userId,
@@ -20,7 +25,7 @@ class CommentModel {
   };
 
   // DELETE comment
-  static delete = (commentId) => {
+  static delete = (commentId: Comment["_id"]) => {
     let request = axios.delete(`${endPoint}/${commentId}`);
     return request;
   };
