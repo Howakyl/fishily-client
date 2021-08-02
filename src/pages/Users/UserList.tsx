@@ -6,10 +6,13 @@ import "./UserList.css";
 
 interface User {
   _id: string;
+  username: string;
+  picture: string;
+  bio?: string;
 }
 
 const UserList = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
