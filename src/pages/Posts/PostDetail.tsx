@@ -3,7 +3,12 @@ import Spinner from "../../components/UI/Spinner";
 import Modal from "../../components/UI/Modal";
 import PostModel from "../../models/post";
 import CommentModel from "../../models/comment";
-import { Redirect, Link, withRouter, RouteComponentProps } from "react-router-dom";
+import {
+  Redirect,
+  Link,
+  withRouter,
+  RouteComponentProps,
+} from "react-router-dom";
 import "./PostDetail.css";
 import PostDetailHeader from "./PostDetailHeader";
 import PostDetailComments from "./PostDetailComments";
@@ -11,14 +16,21 @@ import PostDetailComments from "./PostDetailComments";
 interface Props {
   user: {
     _id: string;
-  } 
+  };
 }
 
 interface Post {
   _id: string;
+  image: string;
+  title: string;
+  fish: string;
+  description: string;
+  locationName: string;
   user: {
+    picture: string;
+    username: string;
     _id: string;
-  }
+  };
   comments: [];
 }
 
