@@ -16,6 +16,7 @@ interface Post {
   lat: number;
   lng: number;
   image: string;
+  _id?: string;
 }
 
 class PostModel {
@@ -26,7 +27,7 @@ class PostModel {
   };
 
   //GET one post
-  static getOne = (id: string) => {
+  static getOne = (id: Post["_id"]) => {
     let request = axios.get(`${endPoint}/${id}`);
     return request;
   };
@@ -38,13 +39,13 @@ class PostModel {
   };
 
   //DELETE post
-  static delete(postId: string) {
+  static delete(postId: Post["_id"]) {
     let request = axios.delete(`${endPoint}/${postId}`);
     return request;
   }
 
   //EDIT post
-  static update(postId: string, updatedPost: Post) {
+  static update(postId: Post["_id"], updatedPost: Post) {
     let request = axios.put(`${endPoint}/${postId}`, updatedPost);
     return request;
   }
