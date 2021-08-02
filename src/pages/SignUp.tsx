@@ -3,7 +3,13 @@ import Input from "../components/UI/Input";
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
 
-const SignUp = (props) => {
+interface Props {
+  user: {
+    username: string;
+  }
+}
+
+const SignUp: React.FC<Props> = (props) => {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -58,11 +64,11 @@ const SignUp = (props) => {
       });
     } else {
       if (!passwordIsValid) {
-        document.getElementById("passInput").focus();
+        document.getElementById("passInput")!.focus();
       } else if (!usernameIsValid) {
-        document.getElementById("usernameInput").focus();
+        document.getElementById("usernameInput")!.focus();
       } else if (!bioIsValid) {
-        document.getElementById("bioInput").focus();
+        document.getElementById("bioInput")!.focus();
       }
     }
   };
