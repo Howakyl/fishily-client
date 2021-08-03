@@ -1,7 +1,26 @@
 import React from "react";
 import classes from "./Input.module.css";
 
-const Input = (props) => {
+interface Props {
+  className?: string;
+  input: {
+    id: string;
+    placeholder?: string;
+    required?: boolean;
+    textarea?: string;
+    type?: string;
+    name?: string;
+    value?: string;
+    step?: string;
+  }
+  label?: string;
+  onIsValid: boolean;
+  requiredText?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => void;
+  onBlur?: () => void;
+}
+
+const Input: React.FC<Props> = (props) => {
   return (
     <div className={`form-group ${classes.input} ${props.className}`}>
       <label htmlFor={props.input.id} className={classes.label}>
