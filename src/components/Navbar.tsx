@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import UserModel from "../models/user";
 
-const Navbar = (props) => {
+interface Props {
+  user: {
+    username: string;
+    _id: string;
+    picture: string;
+  }
+  setUser: React.Dispatch<React.SetStateAction<Props["user"]>>;
+
+}
+
+const Navbar: React.FC<Props> = (props) => {
   function logOutClick() {
-    UserModel.logout(props).then((res) => {
-      props.setUser({});
+    UserModel.logout().then(() => {
+      props.setUser({} as Props["user"]);
       localStorage.clear();
     });
   }

@@ -60,8 +60,8 @@ class UserModel {
   };
 
   //LOGOUT user
-  static logout = (user: User & AxiosRequestConfig) => {
-    let request = axios.delete(logInEndPoint, user);
+  static logout = () => {
+    let request = axios.delete(logInEndPoint);
     return request;
   };
 }
