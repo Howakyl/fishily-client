@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import classes from "./Modal.module.css";
 
 interface Props {
-  className: string;
+  className?: string;
   onShowModal: () => void;
 }
 
