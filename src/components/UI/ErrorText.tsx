@@ -1,7 +1,7 @@
 import classes from "./ErrorText.module.css";
 
 interface Props {
-  className: string;
+  className?: string;
 }
 
 const ErrorText: React.FC<Props> = (props) => {
