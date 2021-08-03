@@ -1,6 +1,14 @@
 import React from "react";
 
-const UserDetailCard = (props) => {
+interface Props {
+  user: {
+    bio: string;
+    picture: string;
+    username: string;
+  }
+}
+
+const UserDetailCard: React.FC<Props> = (props) => {
   function bioText() {
     if (props.user.bio) {
       return props.user.bio;
