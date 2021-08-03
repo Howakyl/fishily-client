@@ -15,6 +15,13 @@ interface Props {
   comments: [
     {
       _id: string;
+      description: string;
+      createdAt: Date;
+      user: {
+        _id: string;
+        username: string;
+        picture: string;
+      };
     }
   ];
   onDeleteComment: (id: string) => void;

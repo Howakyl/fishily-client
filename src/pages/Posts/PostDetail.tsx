@@ -31,7 +31,18 @@ interface Post {
     username: string;
     _id: string;
   };
-  comments: [{ _id: string }];
+  comments: [
+    {
+      _id: string;
+      description: string;
+      createdAt: Date;
+      user: {
+        _id: string;
+        username: string;
+        picture: string;
+      };
+    }
+  ];
 }
 
 const PostDetail: React.FC<Props & RouteComponentProps<any>> = (props) => {
