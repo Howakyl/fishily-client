@@ -1,6 +1,10 @@
 import classes from "./ErrorText.module.css";
 
-const ErrorText = (props) => {
+interface Props {
+  className: string;
+}
+
+const ErrorText: React.FC<Props> = (props) => {
   return (
     <div className={`${props.className} ${classes.errorText}`}>
       <small>{props.children}</small>
