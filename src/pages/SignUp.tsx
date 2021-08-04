@@ -3,7 +3,13 @@ import Input from "../components/UI/Input";
 import UserModel from "../models/user";
 import { Redirect } from "react-router-dom";
 
-const SignUp = (props) => {
+interface Props {
+  user: {
+    username: string;
+  }
+}
+
+const SignUp: React.FC<Props> = (props) => {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -42,7 +48,7 @@ const SignUp = (props) => {
     };
   }, [username, password, bio, usernameIsValid, passwordIsValid, bioIsValid]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(event);
     if (formIsValid) {
@@ -58,11 +64,11 @@ const SignUp = (props) => {
       });
     } else {
       if (!passwordIsValid) {
-        document.getElementById("passInput").focus();
+        document.getElementById("passInput")!.focus();
       } else if (!usernameIsValid) {
-        document.getElementById("usernameInput").focus();
+        document.getElementById("usernameInput")!.focus();
       } else if (!bioIsValid) {
-        document.getElementById("bioInput").focus();
+        document.getElementById("bioInput")!.focus();
       }
     }
   };
@@ -88,7 +94,7 @@ const SignUp = (props) => {
               value: username,
             }}
             requiredText="Must be at least 4 characters long."
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             onIsValid={usernameIsValid}
           />
           <Input
@@ -101,7 +107,7 @@ const SignUp = (props) => {
               value: password,
             }}
             requiredText="Must be at least 4 characters long."
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             onIsValid={passwordIsValid}
           />
           <Input
@@ -112,7 +118,7 @@ const SignUp = (props) => {
               name: "firstName",
               value: firstName,
             }}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
             onIsValid={true}
           />
           <Input
@@ -123,7 +129,7 @@ const SignUp = (props) => {
               name: "lastName",
               value: lastName,
             }}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
             onIsValid={true}
           />
           <Input
@@ -136,7 +142,7 @@ const SignUp = (props) => {
               value: bio,
             }}
             requiredText="Must be fewer than 200 characters long."
-            onChange={(e) => setBio(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBio(e.target.value)}
             onIsValid={bioIsValid}
           />
           <button type="submit" className="btn btn-primary">

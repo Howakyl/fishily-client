@@ -5,7 +5,21 @@ import Spinner from "../../components/UI/Spinner";
 import PostModel from "../../models/post";
 import "./PostList.css";
 
-const PostList = (props) => {
+interface Post {
+  className: string;
+  title: string;
+  _id: string;
+  date: Date;
+  image: string;
+  description: string;
+  user: {
+    username: string;
+      _id: string;
+      picture: string;
+  }
+}
+
+const PostList: React.FC = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +32,7 @@ const PostList = (props) => {
 
   function renderPosts() {
     return posts
-      .map((post) => {
+      .map((post: Post) => {
         return <PostCard post={post} key={post._id} className="postCardWidth" />;
       })
       .reverse();

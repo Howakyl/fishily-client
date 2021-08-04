@@ -1,11 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import Spinner from "../../components/UI/Spinner";
 import UserModel from "../../models/user";
 import "./UserShow.css";
 
-const UserShow = (props) => {
-  const [user, setUser] = useState({});
+interface Props {
+  user: {
+    _id: string;
+  };
+}
+
+interface User {
+  posts: Post[];
+  bio: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  picture: string;
+  _id: string;
+}
+
+interface Post {
+  date: Date;
+  image: string;
+  fish: string;
+  description: string;
+  title: string;
+  _id: string;
+}
+
+const UserShow: React.FC<Props & RouteComponentProps<any>> = (props) => {
+  const [user, setUser] = useState<User>({} as User);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

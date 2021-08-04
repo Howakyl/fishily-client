@@ -4,14 +4,31 @@ import Tooltip from "../UI/Tooltip";
 import Modal from "../UI/Modal";
 import classes from "./Comment.module.css";
 
-const Comment = (props) => {
+interface Props {
+  comment: {
+    _id: string;
+    description: string;
+    createdAt: Date;
+    user: {
+      _id: string;
+      username: string;
+      picture: string;
+    }
+  }
+  user: {
+    _id: string;
+  }
+  onDeleteComment: (arg: string) => void;
+}
+
+const Comment: React.FC<Props> = (props) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const date = new Date(props.comment.createdAt);
   const today = new Date();
-  let diff = Math.abs(today - date);
+  let diff = Math.abs(today.valueOf() - date.valueOf());
 
-  function getDiff(diff) {
+  function getDiff(diff: any) {
     if (diff / 36e5 < 1) {
       // less than an hour ago
       return (diff = `${Math.floor(diff / 1000 / 60)}m`);
@@ -90,9 +107,7 @@ const Comment = (props) => {
                       <button
                         className={`btn btn-primary ${classes.cancelButton}`}
                         type="button"
-                        onClick={() => {
-                          setShowDeleteModal();
-                        }}
+                        onClick={onShowDeleteModal}
                       >
                         Cancel
                       </button>
@@ -101,7 +116,7 @@ const Comment = (props) => {
                         type="button"
                         onClick={() => {
                           props.onDeleteComment(props.comment._id);
-                          setShowDeleteModal();
+                          onShowDeleteModal();
                         }}
                       >
                         Confirm

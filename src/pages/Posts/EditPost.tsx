@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import Spinner from "../../components/UI/Spinner";
 import PostModel from "../../models/post";
 import "./EditPost.css";
 
-const EditPost = (props) => {
+
+const EditPost: React.FC<RouteComponentProps <any>> = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +30,7 @@ const EditPost = (props) => {
     });
   }, [props.match.params.id]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const postId = props.match.params.id;
 
@@ -37,8 +39,8 @@ const EditPost = (props) => {
       description: description,
       fish: fish,
       locationName: locationName,
-      lat: lat,
-      lng: lng,
+      lat: +lat,
+      lng: +lng,
       image: image,
     };
 

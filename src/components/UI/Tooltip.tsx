@@ -1,7 +1,12 @@
 import React from "react";
 import classes from "./Tooltip.module.css";
 
-const Tooltip = (props) => {
+interface Props {
+  className?: string;
+  onShowTooltip: () => void;
+}
+
+const Tooltip: React.FC<Props> = (props) => {
   return (
     <>
       <div

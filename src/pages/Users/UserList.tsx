@@ -4,8 +4,15 @@ import UserModel from "../../models/user";
 import UserCard from "../../components/UserCard";
 import "./UserList.css";
 
-const UserList = (props) => {
-  const [users, setUsers] = useState([]);
+interface User {
+  _id: string;
+  username: string;
+  picture: string;
+  bio?: string;
+}
+
+const UserList = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +23,7 @@ const UserList = (props) => {
   }, []);
 
   function renderUsers() {
-    return users.map((user) => {
+    return users.map((user: User) => {
       return (
         <li className="userList-card" key={user._id}>
           <UserCard user={user} />

@@ -4,7 +4,19 @@ import { Redirect } from "react-router-dom";
 import NewPostMap from "../../components/NewPostMap";
 import Input from "../../components/UI/Input";
 
-const NewPost = (props) => {
+interface Props {
+  user: {
+    _id: string;
+  }
+  onGetCoordinates: (coordinates: Coordinates) => void;
+}
+
+interface Coordinates {
+  longitude: string | number;
+  latitude: string | number;
+}
+
+const NewPost: React.FC<Props> = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
   const [titleIsValid, setTitleIsValid] = useState(false);
   const [descriptionIsValid, setDescriptionIsValid] = useState(false);
@@ -19,9 +31,9 @@ const NewPost = (props) => {
   );
   const [redirectToPosts, setRedirectToPosts] = useState(false);
 
-  const onGetCoordinates = (coordinates) => {
-    setLng(coordinates.longitude);
-    setLat(coordinates.latitude);
+  const onGetCoordinates = (coordinates: Coordinates) => {
+    setLng(coordinates.longitude as string);
+    setLat(coordinates.latitude as string);
   };
 
   useEffect(() => {
@@ -46,7 +58,7 @@ const NewPost = (props) => {
     };
   }, [title, titleIsValid, description, descriptionIsValid]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (formIsValid) {
@@ -55,8 +67,8 @@ const NewPost = (props) => {
         description: description,
         fish: fish,
         locationName: locationName,
-        lat: lat,
-        lng: lng,
+        lat: +lat,
+        lng: +lng,
         image: image,
       };
 
@@ -74,7 +86,7 @@ const NewPost = (props) => {
       <form className="container" onSubmit={handleFormSubmit}>
         <h1 className="newPost-title">submit a new post!</h1>
         <Input
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
           label="Title"
           input={{
             id: "titleInput",
@@ -88,7 +100,7 @@ const NewPost = (props) => {
         />
 
         <Input
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
           label="Description"
           input={{
             id: "descInput",
@@ -102,7 +114,7 @@ const NewPost = (props) => {
         />
 
         <Input
-          onChange={(e) => setFish(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFish(e.target.value)}
           label="Fish Caught:"
           input={{
             id: "fishInput",
@@ -121,7 +133,7 @@ const NewPost = (props) => {
         <section className="row">
           <Input
             className="col"
-            onChange={(e) => setLocationName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLocationName(e.target.value)}
             label="Where Was Your Catch?"
             input={{
               id: "locationInput",
@@ -133,7 +145,7 @@ const NewPost = (props) => {
           />
 
           <Input
-            onChange={(e) => setLat(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLat(e.target.value)}
             className="col"
             label="Latitude"
             input={{
@@ -147,7 +159,7 @@ const NewPost = (props) => {
           />
 
           <Input
-            onChange={(e) => setLng(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLng(e.target.value)}
             className="col"
             label="Longitude"
             input={{
@@ -162,7 +174,7 @@ const NewPost = (props) => {
         </section>
 
         <Input
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setImage(e.target.value)}
           label="Submit a picture!"
           input={{
             id: "imageInput",

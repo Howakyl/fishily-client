@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import classes from "./Modal.module.css";
 
-const Modal = (props) => {
+interface Props {
+  className?: string;
+  onShowModal: () => void;
+}
+
+const Modal: React.FC<Props> = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -12,7 +17,7 @@ const Modal = (props) => {
             {props.children}
           </div>
         </>,
-        document.getElementById("modal-root")
+        document.getElementById("modal-root")!
       )}
     </>
   );

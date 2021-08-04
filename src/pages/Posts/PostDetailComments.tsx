@@ -5,9 +5,37 @@ import Input from "../../components/UI/Input";
 import Comment from "../../components/Comments/Comment";
 import classes from "./PostDetailComments.module.css";
 
-const PostDetailComments = (props) => {
+interface Props {
+  user: {
+    _id: string;
+  };
+  post: {
+    _id: string;
+  };
+  comments: [
+    {
+      _id: string;
+      description: string;
+      createdAt: Date;
+      user: {
+        _id: string;
+        username: string;
+        picture: string;
+      };
+    }
+  ];
+  onDeleteComment: (id: string) => void;
+  onAddComment: () => void;
+}
+
+interface IComment {
+  description: string;
+  _id: string;
+}
+
+const PostDetailComments: React.FC<Props> = (props) => {
   const [showCommentModal, setShowCommentModal] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState<IComment["description"]>("");
   const [commentIsValid, setCommentIsValid] = useState(false);
 
   useEffect(() => {
@@ -41,7 +69,7 @@ const PostDetailComments = (props) => {
       .reverse();
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (commentIsValid) {
@@ -95,9 +123,11 @@ const PostDetailComments = (props) => {
                 type: "text",
                 textarea: "true",
                 placeholder: "Add a comment....",
-                value: description
+                value: description,
               }}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setDescription(e.target.value)
+              }
               onIsValid={commentIsValid}
             />
             <small>{description.length}/300</small>

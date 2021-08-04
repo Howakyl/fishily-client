@@ -2,7 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./PostDetailHeader.module.css";
 
-const PostDetailHeader = (props) => {
+interface Props {
+  className: string;
+  post: {
+    image: string;
+    title: string;
+    fish: string;
+    description: string;
+    locationName: string;
+    user: {
+      picture: string;
+      username: string;
+      _id: string;
+    };
+  };
+  onRenderBtns: () => JSX.Element | undefined;
+}
+
+const PostDetailHeader: React.FC<Props> = (props) => {
   return (
     <div className={`${classes.postHeaderContainer} ${props.className}`}>
       <img

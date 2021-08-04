@@ -4,12 +4,15 @@
 /node_modules
 /.pnp
 .pnp.js
+react-app-env.d.ts
+react-reveal.d.ts
 
 # testing
 /coverage
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store

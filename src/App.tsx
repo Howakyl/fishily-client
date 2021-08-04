@@ -3,8 +3,14 @@ import "./App.css";
 import Routes from "./config/routes";
 import Navbar from "./components/Navbar";
 
+interface User {
+  username: string;
+  _id: string;
+  picture: string;
+}
+
 function App() {
-  let [user, setUser] = useState({});
+  let [user, setUser] = useState<User>({} as User);
 
   //checks if user is logged in
   useEffect(() => {

@@ -1,11 +1,22 @@
 import axios from "axios";
 
-let endPoint;
+let endPoint: string;
 
 if (process.env.NODE_ENV === "production") {
   endPoint = `https://fishily-api.herokuapp.com/api/fishily/posts`;
 } else {
   endPoint = `http://localhost:4000/api/fishily/posts`;
+}
+
+interface Post {
+  title: string;
+  description: string;
+  fish: string;
+  locationName: string;
+  lat: number;
+  lng: number;
+  image: string;
+  _id?: string;
 }
 
 class PostModel {
@@ -16,25 +27,25 @@ class PostModel {
   };
 
   //GET one post
-  static getOne = (id) => {
+  static getOne = (id: Post["_id"]) => {
     let request = axios.get(`${endPoint}/${id}`);
     return request;
   };
 
   //CREATE post
-  static create = (post, userId) => {
+  static create = (post: Post, userId: string) => {
     let request = axios.post(`${endPoint}/${userId}`, post);
     return request;
   };
 
   //DELETE post
-  static delete(postId) {
+  static delete(postId: Post["_id"]) {
     let request = axios.delete(`${endPoint}/${postId}`);
     return request;
   }
 
   //EDIT post
-  static update(postId, updatedPost) {
+  static update(postId: Post["_id"], updatedPost: Post) {
     let request = axios.put(`${endPoint}/${postId}`, updatedPost);
     return request;
   }

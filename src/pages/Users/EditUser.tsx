@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import Spinner from "../../components/UI/Spinner";
 import UserModel from "../../models/user";
 
-const EditUser = (props) => {
+const EditUser: React.FC<RouteComponentProps <any>> = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  // const [ password, setPassword ] = useState('');
   const [bio, setBio] = useState("");
   const [picture, setPicture] = useState("");
 
@@ -24,7 +24,7 @@ const EditUser = (props) => {
     });
   }, [props.match.params.id]);
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const userId = props.match.params.id;
 
@@ -84,7 +84,6 @@ const EditUser = (props) => {
             <label htmlFor="bioInput">Bio:</label>
             <textarea
               onChange={(e) => setBio(e.target.value)}
-              type="text"
               className="form-control"
               id="bioInput"
               value={bio}
