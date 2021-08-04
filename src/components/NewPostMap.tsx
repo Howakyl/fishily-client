@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactMapGl, { Marker, ViewportProps } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
 import "./NewPostMap.css";
+// @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 

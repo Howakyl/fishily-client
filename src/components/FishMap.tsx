@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactMapGl, { Marker, Popup, FlyToInterpolator, ViewportProps } from "react-map-gl";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
+// @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
