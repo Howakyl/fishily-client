@@ -5,21 +5,52 @@ import mapboxgl from "mapbox-gl";
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
-const FishMap = (props) => {
-  const [viewport, setViewport] = useState({
+interface Props {
+  posts: IPost[];
+}
+
+interface IPostState {
+  post?: IPost;
+}
+
+interface IPost {
+  lat: number;
+  lng: number;
+  locationName: string;
+  image: string;
+  title: string;
+  user: {
+    username: string;
+  }
+  fish: string;
+  _id: string;
+}
+
+interface ViewPort {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  width: string;
+  height: string;
+  transitionDuration?: number;
+  transitionInterpolator?: FlyToInterpolator;
+}
+
+const FishMap: React.FC<Props> = (props) => {
+  const [viewport, setViewport] = useState<ViewPort>({
     latitude: 47.6062,
     longitude: -122.3321,
     zoom: 10,
     width: "100vw",
-    height: "60vh",
+    height: "60vh",    
   });
 
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<IPostState["post"]>(undefined);
 
   useEffect(() => {
-    const listener = (e) => {
+    const listener = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setSelectedPost(null);
+        setSelectedPost(undefined);
       }
     };
     window.addEventListener("keydown", listener);
@@ -31,7 +62,7 @@ const FishMap = (props) => {
   }, []);
 
   function displayCatchLocation() {
-    if (selectedPost.locationName) {
+    if (selectedPost && selectedPost.locationName) {
       return (
         <small className="mr-3">Caught At: {selectedPost.locationName}</small>
       );
@@ -40,13 +71,13 @@ const FishMap = (props) => {
     }
   }
 
-  const goToMarker = (clickedMarker) => {
+  const goToMarker = (clickedMarker: IPost) => {
     setViewport({
       ...viewport,
       longitude: clickedMarker.lng,
       latitude: clickedMarker.lat,
       zoom: 10,
-      tranistionDuration: 5000,
+      transitionDuration: 800,
       transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
     });
   };
@@ -58,10 +89,11 @@ const FishMap = (props) => {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/howakyl/ckjf4skamegso19lhg8mm027h"
         onViewportChange={(viewport) => {
+          // @ts-ignore
           setViewport(viewport);
         }}
         onMouseMove={(e) => {
-          document.getElementById("info").innerHTML = JSON.stringify(e.lngLat);
+          document.getElementById("info")!.innerHTML = JSON.stringify(e.lngLat);
         }}
       >
         {props.posts.map((post, index) => (
@@ -84,9 +116,8 @@ const FishMap = (props) => {
           <Popup
             latitude={selectedPost.lat}
             longitude={selectedPost.lng}
-            id="btn-popup"
             onClose={() => {
-              setSelectedPost(null);
+              setSelectedPost(undefined);
             }}
             closeOnClick={false}
             offsetLeft={30}
