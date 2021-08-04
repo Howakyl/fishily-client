@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactMapGl, { Marker, Popup, FlyToInterpolator } from "react-map-gl";
+import ReactMapGl, { Marker, Popup, FlyToInterpolator, ViewportProps } from "react-map-gl";
 import { Link } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -26,23 +26,16 @@ interface IPost {
   _id: string;
 }
 
-interface ViewPort {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-  width: string;
-  height: string;
-  transitionDuration?: number;
-  transitionInterpolator?: FlyToInterpolator;
-}
-
 const FishMap: React.FC<Props> = (props) => {
-  const [viewport, setViewport] = useState<ViewPort>({
+  // @ts-ignore
+  const [viewport, setViewport] = useState<ViewportProps>({
     latitude: 47.6062,
     longitude: -122.3321,
     zoom: 10,
+    // @ts-ignore
     width: "100vw",
-    height: "60vh",    
+    // @ts-ignore
+    height: "60vh",
   });
 
   const [selectedPost, setSelectedPost] = useState<IPostState["post"]>(undefined);
@@ -89,7 +82,6 @@ const FishMap: React.FC<Props> = (props) => {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/howakyl/ckjf4skamegso19lhg8mm027h"
         onViewportChange={(viewport) => {
-          // @ts-ignore
           setViewport(viewport);
         }}
         onMouseMove={(e) => {
