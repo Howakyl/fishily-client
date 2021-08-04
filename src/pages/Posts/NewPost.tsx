@@ -8,11 +8,12 @@ interface Props {
   user: {
     _id: string;
   }
+  onGetCoordinates: (coordinates: Coordinates) => void;
 }
 
 interface Coordinates {
-  longitude: string;
-  latitude: string;
+  longitude: string | number;
+  latitude: string | number;
 }
 
 const NewPost: React.FC<Props> = (props) => {
@@ -31,8 +32,8 @@ const NewPost: React.FC<Props> = (props) => {
   const [redirectToPosts, setRedirectToPosts] = useState(false);
 
   const onGetCoordinates = (coordinates: Coordinates) => {
-    setLng(coordinates.longitude);
-    setLat(coordinates.latitude);
+    setLng(coordinates.longitude as string);
+    setLat(coordinates.latitude as string);
   };
 
   useEffect(() => {
